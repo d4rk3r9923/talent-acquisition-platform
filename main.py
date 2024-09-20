@@ -24,20 +24,18 @@ def loginLinkedIn(driver, username, password):
     time.sleep(2)
     return driver
 
-
-# Expand all "See more" sections
 def expandSeeMore(driver):
     last_height = driver.execute_script("return document.body.scrollHeight")
     
     while True:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(1)
+        time.sleep(0.2)
 
         see_more_buttons = driver.find_elements(By.XPATH, "//button[text()='…see more']")
         for button in see_more_buttons:
             try:
                 ActionChains(driver).move_to_element(button).click(button).perform()
-                time.sleep(1)  
+                time.sleep(0.2)  
             except Exception as e:
                 print(f"Error clicking 'See more' button: {e}")
 
@@ -188,8 +186,8 @@ if __name__ == "__main__":
     categories = ["LLM"]
     locations = ["Ho Chi Minh"]
     max_page = 2
-    username = "ngduyminh2301@gmail.com"
-    password = "duyminhlinkedin2301"
+    username = "hrai.aip391@gmail.com"
+    password = "hraiaip391"
 
     # Initialize WebDriver with options
     options = Options()
