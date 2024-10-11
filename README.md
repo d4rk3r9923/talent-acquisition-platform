@@ -9,7 +9,7 @@ This project aims to revolutionize the recruitment industry by integrating **Lar
 ## 📅 Project Overview
 
 **Project Duration**: September 2024 - December 2024  
-**Class**: FA24AI35  
+**Group name**: FA24AI35  
 **Supervisors**:
 - 🧑‍🏫 Nguyễn Quốc Trung (trungnq46@fe.edu.vn)
 - 🧑‍🏫 Trần Trọng Huỳnh
