@@ -1,0 +1,12 @@
+{"category": "Person Profile", "description": "Questions about a person"}
+{"category": "Education and Work Experience", "description": "Questions about education and work experience"}
+{"category": "Skills and Certifications", "description": "Questions about skills and certifications"}
+{"category": "Publications and Achievements", "description": "Questions about publications and achievements"}
+{"category": "Workplace and Position", "description": "Questions about workplace and position"}
+{"category": "Relationships and Networks", "description": "Questions about relationships between people"}
+{"category": "Path Analysis", "description": "Questions about paths between nodes"}
+{"category": "Node Similarity", "description": "Questions about similarity between nodes"}
+{"category": "Graph Structure", "description": "Questions about the overall structure of the graph"}
+{"category": "Centrality and Influence", "description": "Questions about centrality and influence of nodes"}
+{"category": "Community Detection", "description": "Questions about communities within the graph"}
+{"category": "Anomaly Detection", "description": "Questions about anomalies within the graph"}

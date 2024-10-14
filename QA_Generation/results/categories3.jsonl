@@ -1,0 +1,30 @@
+{"category": "Person Career Path", "description": "Questions about a person"}
+{"category": "Person Skill Set", "description": "Questions about a person"}
+{"category": "Person Education Background", "description": "Questions about a person"}
+{"category": "Person Certification and Publication", "description": "Questions about a person"}
+{"category": "Company Information", "description": "Questions about a company"}
+{"category": "Skill and Certification", "description": "Questions about a skill and a certification"}
+{"category": "Position and Skill", "description": "Questions about a position and a skill"}
+{"category": "Education and Skill", "description": "Questions about an education and a skill"}
+{"category": "Company and Skill", "description": "Questions about a company and a skill"}
+{"category": "Person Career Path and Skill", "description": "Questions about a person"}
+{"category": "Person Background", "description": "Questions about a person"}
+{"category": "Person Career", "description": "Questions about a person"}
+{"category": "Person Education", "description": "Questions about a person"}
+{"category": "Person Skills", "description": "Questions about a person"}
+{"category": "Person Certifications", "description": "Questions about a person"}
+{"category": "Person Work Experience", "description": "Questions about a person"}
+{"category": "Person Achievements", "description": "Questions about a person"}
+{"category": "Person Network", "description": "Questions about a person"}
+{"category": "Person Portfolio", "description": "Questions about a person"}
+{"category": "Person Location", "description": "Questions about a person"}
+{"category": "Node Aspect", "description": "Questions about one node property or a relationship property."}
+{"category": "Node-Node Aspect", "description": "Questions about one node and one other node that are directly connected."}
+{"category": "Node-Node-Node Aspect", "description": "Questions about one node and two other nodes that are directly connected."}
+{"category": "Node-Node-Node-Node Aspect", "description": "Questions about one node and three other nodes that are directly connected."}
+{"category": "Path Aspect", "description": "Questions about one node and a path of two or more relationships."}
+{"category": "Bi-Node Aspect", "description": "Questions about two nodes and their common nodes."}
+{"category": "Node-Relationship Aspect", "description": "Questions about one node and one relationship."}
+{"category": "Node-Node-Relationship Aspect", "description": "Questions about one node, one other node, and one relationship."}
+{"category": "Meta Aspect", "description": "Questions about the graph as a whole."}
+{"category": "Quantitative Aspect", "description": "Questions about the quantity of nodes or relationships."}

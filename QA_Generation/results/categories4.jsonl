@@ -1,0 +1,24 @@
+{"category": "Node Aspect", "description": "Questions that focus on one aspect of a node"}
+{"category": "Node Comparison", "description": "Questions that compare two or more nodes"}
+{"category": "Relationship Aspect", "description": "Questions that focus on one aspect of a relationship"}
+{"category": "Path Exploration", "description": "Questions that explore paths between nodes"}
+{"category": "Node-Relationship Aspect", "description": "Questions that focus on one aspect of a node and its relationships"}
+{"category": "Causal Relationship", "description": "Questions that explore causal relationships between nodes"}
+{"category": "Node-Node-Relationship Aspect", "description": "Questions that focus on one aspect of two nodes and their relationships"}
+{"category": "General Knowledge", "description": "Questions that test general knowledge about the graph"}
+{"category": "Person Profile", "description": "Questions about a person"}
+{"category": "Career Development", "description": "Questions about a person"}
+{"category": "Skill Proficiency", "description": "Questions about a person"}
+{"category": "Education and Certifications", "description": "Questions about a person"}
+{"category": "Work Experience", "description": "Questions about a person"}
+{"category": "Achievements and Awards", "description": "Questions about a person"}
+{"category": "Network and Connections", "description": "Questions about a person"}
+{"category": "Personal and Professional Growth", "description": "Questions about a person"}
+{"category": "Person Career Development", "description": "Questions about a person"}
+{"category": "Person Skillset", "description": "Questions about a person"}
+{"category": "Person Network", "description": "Questions about a person"}
+{"category": "Person Education and Certification", "description": "Questions about a person"}
+{"category": "Skill and Position", "description": "Questions about the relationship between skills and positions"}
+{"category": "Workplace Expertise", "description": "Questions about the expertise of a workplace"}
+{"category": "Publication and Certification", "description": "Questions about the relationship between publications and certifications"}
+{"category": "Education and Skill", "description": "Questions about the relationship between education and skills"}

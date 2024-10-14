@@ -1,0 +1,64 @@
+{"category": "Person Career Development", "description": "Questions about a person"}
+{"category": "Person Knowledge and Expertise", "description": "Questions about a person"}
+{"category": "Person Career Development", "description": "Questions about a person"}
+{"category": "Person Knowledge Acquisition", "description": "Questions about a person"}
+{"category": "Person Career Path", "description": "Questions about a person's career progression, including their work history, job titles, and industries."}
+{"category": "Person Skillset", "description": "Questions about a person's skills, including their proficiency levels, skill categories, and relevant certifications."}
+{"category": "Person Education", "description": "Questions about a person's educational background, including their degrees, institutions, and fields of study."}
+{"category": "Person Achievements", "description": "Questions about a person's achievements, including their awards, publications, and patents."}
+{"category": "Person Network", "description": "Questions about a person's professional network, including their colleagues, mentors, and connections."}
+{"category": "Person Location", "description": "Questions about a person's location, including their current city, country, and region."}
+{"category": "Person Portfolio", "description": "Questions about a person's portfolio, including their projects, products, and services."}
+{"category": "Person Summary", "description": "Questions about a person's summary, including their bio, description, and keywords."}
+{"category": "Person Experience", "description": "Questions about a person's experience, including their work experience, volunteer experience, and relevant skills."}
+{"category": "Person Certifications", "description": "Questions about a person's certifications, including their certification names, issuers, and dates."}
+{"category": "Person Publications", "description": "Questions about a person's publications, including their publication titles, authors, and dates."}
+{"category": "Person Work History", "description": "Questions about a person's work history, including their job titles, company names, and dates."}
+{"category": "Person's skills and expertise", "description": "Questions about a person's skills and expertise, including their proficiency level and experience."}
+{"category": "Education and career path", "description": "Questions about a person's education and career path, including their degrees, work experience, and career progression."}
+{"category": "Work experience and achievements", "description": "Questions about a person's work experience and achievements, including their job titles, company names, and achievements."}
+{"category": "Certifications and licenses", "description": "Questions about a person's certifications and licenses, including the type of certification and the issuing organization."}
+{"category": "Publications and research", "description": "Questions about a person's publications and research, including the title of the publication, the author's name, and the publication date."}
+{"category": "Network and connections", "description": "Questions about a person's network and connections, including their colleagues, friends, and acquaintances."}
+{"category": "Person's interests and hobbies", "description": "Questions about a person's interests and hobbies, including their favorite sports, music, and books."}
+{"category": "Person's background and demographics", "description": "Questions about a person's background and demographics, including their age, gender, and ethnicity."}
+{"category": "Person's personality and traits", "description": "Questions about a person's personality and traits, including their strengths, weaknesses, and values."}
+{"category": "Person's goals and aspirations", "description": "Questions about a person's goals and aspirations, including their career goals, personal goals, and aspirations."}
+{"category": "Person's challenges and obstacles", "description": "Questions about a person's challenges and obstacles, including their personal challenges, professional challenges, and obstacles."}
+{"category": "Person's motivations and drivers", "description": "Questions about a person's motivations and drivers, including their motivations, values, and drivers."}
+{"category": "Person's skills and expertise", "description": "Questions about a person's skills and expertise, including their proficiency level and relevance to their work experience."}
+{"category": "Person's work experience and career path", "description": "Questions about a person's work experience, including their job titles, companies, and career progression."}
+{"category": "Person's education and academic background", "description": "Questions about a person's education, including their degrees, institutions, and academic achievements."}
+{"category": "Person's achievements and certifications", "description": "Questions about a person's achievements and certifications, including their awards, publications, and professional certifications."}
+{"category": "Person's relationships and network", "description": "Questions about a person's relationships and network, including their colleagues, friends, and acquaintances."}
+{"category": "Person's interests and hobbies", "description": "Questions about a person's interests and hobbies, including their favorite activities, sports, and hobbies."}
+{"category": "Person's location and travel history", "description": "Questions about a person's location and travel history, including their current location, hometown, and travel destinations."}
+{"category": "Person's portfolio and creative work", "description": "Questions about a person's portfolio and creative work, including their writing, art, and design."}
+{"category": "Person's summary and bio", "description": "Questions about a person's summary and bio, including their professional summary, bio, and about page."}
+{"category": "Person's phone and contact information", "description": "Questions about a person's phone and contact information, including their phone number, email, and social media profiles."}
+{"category": "Person's date of birth and age", "description": "Questions about a person's date of birth and age, including their birthdate, age, and astrological sign."}
+{"category": "Person's overall profile and attributes", "description": "Questions about a person's overall profile and attributes, including their name, ID, and other identifying information."}
+{"category": "Person Overview", "description": "Questions about a person"}
+{"category": "Person Connections", "description": "Questions about a person and their connections"}
+{"category": "Person History", "description": "Questions about a person and their history"}
+{"category": "Person Skills", "description": "Questions about a person and their skills"}
+{"category": "Person Education", "description": "Questions about a person and their education"}
+{"category": "Person Work Experience", "description": "Questions about a person and their work experience"}
+{"category": "Person Achievements", "description": "Questions about a person and their achievements"}
+{"category": "Person Network", "description": "Questions about a person and their network"}
+{"category": "Skill Overview", "description": "Questions about a skill"}
+{"category": "Skill Connections", "description": "Questions about a skill and its connections"}
+{"category": "Education Overview", "description": "Questions about an education"}
+{"category": "WorkPlace Overview", "description": "Questions about a workplace"}
+{"category": "Person Overview", "description": "General information about a person, including their name, phone number, date of birth, summary, location, and portfolio."}
+{"category": "Person Skills", "description": "A person's skills, including the name and category of each skill."}
+{"category": "Person Experience", "description": "A person's work experience, including the position, duration, responsibilities, and achievements."}
+{"category": "Person Education", "description": "A person's educational background, including the name and field of study."}
+{"category": "Person Achievements", "description": "A person's achievements, including publications and certifications."}
+{"category": "Person Work History", "description": "A person's work history, including the workplace, duration, role, start and end dates, responsibilities, and achievements."}
+{"category": "Skill Relevance", "description": "The relevance of a skill to a position or certification."}
+{"category": "Position Requirements", "description": "The skills and qualifications required for a position."}
+{"category": "Workplace Overview", "description": "General information about a workplace, including its name, domain expertise, and size."}
+{"category": "Education Overview", "description": "General information about an education, including its name and field of study."}
+{"category": "Certification Overview", "description": "General information about a certification, including its category."}
+{"category": "Publication Overview", "description": "General information about a publication, including its category."}
