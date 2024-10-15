@@ -7,7 +7,7 @@ lamini.api_key = "b1a1082334df151265156ef4a168352dff52db8e3064fa8d079f22b9051aea
 def get_default_finetune_args():
     return {
         "learning_rate": 0.0003,
-        "max_steps": 60,
+        "max_steps": 30,
         "early_stopping": False,
         "load_best_model_at_end": False,
         "peft_args": {"r_value": 32},
