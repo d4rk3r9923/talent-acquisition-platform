@@ -5,8 +5,8 @@ lamini.api_key = "b1a1082334df151265156ef4a168352dff52db8e3064fa8d079f22b9051aea
 
 
 message = [
-    System("You are a helpful assistant."),
-    Human(),
+    System(content="You are a helpful assistant."),
+    Human(content="{input}"),
     Assistant()]
 
 # Invoke the LLM with the formatted input
@@ -20,9 +20,12 @@ while True:
         break
     bot = ''
     print("AI: ", end="", flush=True)
-    for chunk in llm.stream({"content": user}):
+    for chunk in llm.stream({"input": user}):
         print(chunk, end="", flush=True)
         bot += chunk
     print()
-    message.insert(1, Human(content=user))
-    message.insert(2, Assistant(content=bot))
+    message.insert(-2, Human(content=user))
+    message.insert(-2, Assistant(content=bot))
+
+from pprint import pprint
+pprint(message)

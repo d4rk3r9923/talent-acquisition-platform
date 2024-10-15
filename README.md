@@ -37,7 +37,7 @@ This is the simple code to run lamini in langchain
 
 ### 1-chatbot.py
 
-This is simple use as chatbot
+This is example use as chatbot
 
 ### 2-finetune.py
 

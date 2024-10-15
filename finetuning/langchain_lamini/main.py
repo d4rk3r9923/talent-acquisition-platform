@@ -24,11 +24,10 @@ class ChatLamini(LLM):
 
         previous = "\n\n"
         for output in llm.create(prompt=prompt, model_name=self.model_name, max_new_tokens=self.max_new_tokens):
-            try:
-                if output:
-                    cur = output["outputs"][0]["output"]
-            except ConnectionError:
-                print("Error: Failed to connect to the internet.")
+            if output:
+                cur = output["outputs"][0]["output"]
+            else:
+                continue
 
             chunk = GenerationChunk(text=cur.removeprefix(previous))
             previous = cur
@@ -45,17 +44,13 @@ class ChatLamini(LLM):
         return "lamini"
 
 
-def System(content=None):
+def System(content) -> str:
     """role: system"""
-    if content:
-        return f"<|start_header_id|>system<|end_header_id|>{content}<|eot_id|>"
-    return "<|start_header_id|>system<|end_header_id|>{content}<|eot_id|>"
+    return f"<|start_header_id|>system<|end_header_id|>{content}<|eot_id|>"
   
-def Human(content=None):
+def Human(content) -> str:
     """role: user"""
-    if content:
-        return f"<|start_header_id|>user<|end_header_id|>{content}<|eot_id|>"
-    return "<|start_header_id|>user<|end_header_id|>{content}<|eot_id|>"
+    return f"<|start_header_id|>user<|end_header_id|>{content}<|eot_id|>"
 
 def Assistant(content=None):
     """role: assistant"""
