@@ -15,16 +15,44 @@ async def read_content_pdf(file_path):
     # Open the PDF file
     document = fitz.open(file_path)
     
-    # Iterate through pages and extract text
-    pdf_text = ""
+    pdf_content = ""
+    
     for page_num in range(len(document)):
         page = document.load_page(page_num)
-        pdf_text += page.get_text()
+        
+        # Extract page content as a dictionary
+        page_dict = page.get_text("dict")
+        
+        # Iterate through blocks of text
+        for block in page_dict["blocks"]:
+            for line in block["lines"]:
+                line_text = ""  # To store the text for each line
+                for span in line["spans"]:
+                    # Get the text of the word or phrase
+                    text = span["text"]
+                    
+                    # Check if this span has a link associated with it
+                    links = page.get_links()
+                    for link in links:
+                        # Compare the position of the link with the span's position
+                        if 'uri' in link:
+                            link_rect = fitz.Rect(link['from'])
+                            text_rect = fitz.Rect(span['bbox'])
+                            
+                            # If the text is within the link's area, consider it a link
+                            if link_rect.intersects(text_rect):
+                                text += f"({link['uri']})"
+                    
+                    # Append the text (with or without link) to the line text
+                    line_text += text
+                
+                # After processing a line, add it to pdf_content with a newline
+                pdf_content += line_text + "\n"
     
     # Close the document
     document.close()
     
-    return pdf_text
+    return pdf_content
 
 
 def create_enum_from_objects(object_list, enum_name):
@@ -35,4 +63,7 @@ def create_enum_from_objects(object_list, enum_name):
     unique_values = {getattr(obj, first_attribute) for obj in object_list}
 
     # Create the Enum class dynamically
+    # return Enum(enum_name, { value.upper().replace(' ','_'): value for value in unique_values})
     return Enum(enum_name, { str(uuid.uuid5(uuid.NAMESPACE_DNS, value)): value for value in unique_values})
+
+ 

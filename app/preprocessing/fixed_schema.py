@@ -74,7 +74,7 @@ list_universites = [
     Education(name="University of Medicine and Pharmacy at Ho Chi Minh City", field="Healthcare"),
     Education(name="National Economics University", field="Economics"),
     Education(name="Ho Chi Minh City Open University", field="Economics, Social Sciences, Technology"),
-    Education(name="University Others", field="others")
+    Education(name="Others University", field="others")
 ]
 
 
@@ -82,6 +82,8 @@ list_workplaces = [
     WorkPlace(name="Viettel Group", domain_expertise="Telecommunications", size="Large"),
     WorkPlace(name="VinGroup", domain_expertise="Conglomerate", size="Large"),
     WorkPlace(name="FPT Corporation", domain_expertise="Technology", size="Large"),
+    WorkPlace(name="FPT Software", domain_expertise="Technology", size="Large"),
+    WorkPlace(name="Bosch Global Software Technologies", domain_expertise="Technology", size="Large"),
     WorkPlace(name="Masan Group", domain_expertise="Consumer Goods", size="Large"),
     WorkPlace(name="Techcombank", domain_expertise="Banking", size="Large"),
     WorkPlace(name="VinaPhone", domain_expertise="Telecommunications", size="Large"),
@@ -169,7 +171,7 @@ list_workplaces = [
     WorkPlace(name="TPBank", domain_expertise="Banking", size="Medium"),
     WorkPlace(name="Viet A Bank", domain_expertise="Banking", size="Medium"),
     WorkPlace(name="LienVietPostBank", domain_expertise="Banking", size="Large"),
-    WorkPlace(name="WorkPlace Others", domain_expertise="others", size="others")
+    WorkPlace(name="Others Company", domain_expertise="others", size="others")
 ]
 
 

@@ -2,6 +2,7 @@ import os
 import openai 
 import instructor
 import asyncio
+from pprint import pprint
 from loguru import logger
 from dotenv import load_dotenv
 from typing import List
@@ -26,9 +27,10 @@ async def extract(path_pdf):
         messages=[
             {
                 "role": "user",
-                "content": f"Get the information of this resume and write a short summary: \n {content}",
+                "content": f"Get the information of this resume and write a short summary (all in english): \n {content}",
             },
         ],
+        temperature=0, 
         response_model=CandidateProfile
     )
 
@@ -48,6 +50,6 @@ async def main(pdf_paths: List[str]):
 
 if __name__ == "__main__":
     # Example input list of PDF file paths
-    pdf_paths = ["data/thanhnguyen1.pdf"]
+    pdf_paths = ["data/pdf/ThanhNguyen.pdf"]
     
     asyncio.run(main(pdf_paths))
