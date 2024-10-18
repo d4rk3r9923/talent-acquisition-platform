@@ -50,6 +50,6 @@ async def main(pdf_paths: List[str]):
 
 if __name__ == "__main__":
     # Example input list of PDF file paths
-    pdf_paths = ["data/pdf/ThanhNguyen.pdf"]
+    pdf_paths = ["data/sample/ThanhNguyen.pdf"]
     
     asyncio.run(main(pdf_paths))
