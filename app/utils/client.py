@@ -21,7 +21,7 @@ ChatOllama_llama = ChatOllama(
 
 # This model only for extract resume in preprocessing step.
 ChatLlamacpp_llama = Llama(
-    model_path="/Users/thanhnguyen/Documents/Developer/models/llm/SanctumAI-meta-llama-3-8b-instruct.Q8_0.gguf",
+    model_path="/Users/thanhnguyen/Documents/Developer/models/llm/SanctumAI-meta-llama-3-8b-instruct.Q8_0.gguf", #model_path="../../models/SanctumAI-meta-llama-3-8b-instruct.Q8_0.gguf",
     n_gpu_layers=100,
     n_batch=5000,
     n_threads=multiprocessing.cpu_count() - 3,
