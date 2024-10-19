@@ -113,9 +113,6 @@ def convert_to_years_months(total_years, total_months):
 
 
 def process_candidate_data(candidate_data):
-    with open("./data/sample/sample.json") as f:
-        candidate_data = json.load(f)
-
     candidate_data = replace_nulls(candidate_data)
     for candidate in candidate_data:
         role_dict = defaultdict(
@@ -168,14 +165,5 @@ def process_candidate_data(candidate_data):
                     "achievements": list(set(details["achievements"])),
                 }
             )
-
-    json.dump(
-        candidate_data,
-        open(
-            "./data/sample/added_positions.json",
-            "w",
-        ),
-        indent=4,
-    )
 
     return candidate_data
