@@ -95,7 +95,7 @@ async def add_nodes_to_db(driver, nodes, node_type):
                     f"CREATE (n:{node_type} $props)",
                     props=node,
                 )
-                logger.info(f"{Color.RED}Added {node_type} node:{Color.RESET} {node}")
+                # logger.info(f"{Color.RED}Added {node_type} node:{Color.RESET} {node}")
             except Exception as e:
                 logger.error(f"{Color.RED}Error adding {node_type} node {node}:{Color.RESET} {e}")
 
@@ -116,5 +116,5 @@ async def main():
 
 
 if __name__ == "__main__":
-    logger.info("Starting to add nodes to Neo4j")
+    logger.info(f"{Color.RED}Starting to add nodes to Neo4j")
     asyncio.run(main())
