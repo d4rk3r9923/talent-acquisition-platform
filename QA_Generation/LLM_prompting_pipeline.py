@@ -2,6 +2,7 @@ import operator
 from typing_extensions import TypedDict
 from langgraph.constants import Send
 from langgraph.graph import StateGraph, START, END
+from langchain_together import ChatTogether
 from typing import Annotated, TypedDict, List
 from template_utils import categories_template, map_categories_template, get_schema, generate_QA_template
 from langchain_openai import AzureChatOpenAI
@@ -11,8 +12,7 @@ import os
 import asyncio
 import time
 
-os.environ["AZURE_OPENAI_API_KEY"] = "ae503f6efa1a4211aa89b74a501a9551"
-os.environ["AZURE_OPENAI_ENDPOINT"] = "https://genai4e.openai.azure.com/"
+os.environ["TOGETHER_API_KEY"] = "80f6eb25e6e817651c95012f6f92a9a4cfc33a7352e996ee46ca65fa4d7ce051"
 
 class State(TypedDict):
     schema: str
@@ -95,13 +95,14 @@ if __name__=="__main__":
     if not os.path.exists("results"):
         os.makedirs("results")
 
-    llm = AzureChatOpenAI(
-    azure_deployment="gpt-35-turbo",  # or your deployment
-    api_version="2023-03-15-preview",  # or your api version
-    temperature=0.7,
-    max_tokens=50000,
-    # other params...
-)
+    llm = ChatTogether(
+        model="meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+        temperature=0.0,
+        max_tokens=None,
+        timeout=None,
+        max_retries=5,
+        # other params...
+    )
 
     inital_chain = categories_template() | llm.with_structured_output(Categories)
     map_chain = map_categories_template() | llm.with_structured_output(Categories)
