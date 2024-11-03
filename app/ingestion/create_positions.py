@@ -1,5 +1,5 @@
 import json
-from app.utils.util import process_candidate_data
+from app.references.util import process_candidate_data
 
 if __name__ == "__main__":
     with open("./data/sample/sample.json") as f:

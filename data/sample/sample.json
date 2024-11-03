@@ -1,64 +1,318 @@
 [
     {
         "person": {
-            "name": "Hà Bùi",
-            "summary": "Software developer with 7 years of experience, specializing in ERP system development and implementation. Proficient in full-stack development, automated testing, and IoT data handling. Strong problem-solving skills and a proactive approach to technology research and application.",
-            "phone": null,
-            "dob": "1994-11-16",
-            "location": "Hanoi, Vietnam",
-            "portfolio": null
+            "name": "Thái Thành Nguyễn",
+            "summary": "An AI engineer with a strong background in natural language processing (NLP) and multi-agent systems. Has interned at Bosch Global Software Technologies and QAI FPT Software focusing on multimodal retrieval and graph convolutional networks. Enthusiastic about leveraging large language models and knowledge graphs for advanced reasoning solutions.",
+            "phone": "+84 888.150.900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": [
+                "https://www.linkedin.com/in/tnnguyen159/"
+            ]
         },
         "work_experience": [
             {
-                "work_place": "Others Company",
-                "role": "Software Engineer",
-                "start_date": "2018-01-01",
-                "end_date": "2024-01-01",
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-01",
                 "responsibilities": [
-                    "Plan and manage tasks assigned by the director, programming solutions for customer problems in the ERP system.",
-                    "Optimize previously created functions to enhance performance and reduce processing time.",
-                    "Participate in meetings to consult solutions for customers."
+                    "Develop fully, locally-hosted multimodal RAG capable of handling multi-hop questions, image content.",
+                    "Implement context-aware chunking and pre-processing of PDFs to extract tables, images contents.",
+                    "Investigate open-source models that integrate with tool calling, structured output, and JSON format.",
+                    "Design and implement multi-agent systems where multiple agents collaborate to complete tasks.",
+                    "Using some prompt technique such as tree-of-thoughts, ReAct, Reflexion to leverage LLMs to generate test cases based on requirements."
                 ],
                 "achievements": [
-                    "Resolved complex programming issues faced by colleagues.",
-                    "Created patterns for project use.",
-                    "Architected the framework for the company's ERP system.",
-                    "Researched new technologies for software upgrade proposals."
+                    "Contributed to the development of innovative GenAI solutions for the department.",
+                    "Runner-up in an internal hackathon related to a car diagnostic chatbot.",
+                    "Contribute to LangChain by integrating a llamaCpp, supporting instructed chat, chain, and tool calling."
                 ]
             },
             {
-                "work_place": "Others Company",
-                "role": "Software Engineer",
-                "start_date": "2016-09-01",
-                "end_date": "2024-01-01",
+                "work_place": "VinaCapital",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
+                "end_date": "2023-12-01",
                 "responsibilities": [
-                    "Program modules in C# MVC core 2.1 as assigned by the department head.",
-                    "Write RESTful APIs in C#.",
-                    "Develop HTML interfaces combined with JavaScript, jQuery, and AngularJS.",
-                    "Program modules on SharePoint.",
-                    "Develop WinForms applications in C# for MES system communication.",
-                    "Mobile programming in C# with Xamarin and React Native for Android and iOS."
+                    "Develop a graph convolutional network model that extracts key information from invoice images (OCR).",
+                    "Fine-tune BERT by leveraging more features such as word-level and character-level features.",
+                    "Trained with hard negative sampling in classification using contrastive learning and triplet loss."
                 ],
                 "achievements": []
             }
-        ],
-        "education": [
-            {
-                "university": "Hanoi University of Industry",
-                "degree": "Bachelor's in Computer Science",
-                "start_year": "2012-01-01",
-                "end_year": "2016-12-01",
-                "achievement": null
-            }
-        ],
-        "certification": null,
-        "publications": null
+        ]
     },
     {
         "person": {
             "name": "Thái Thành Nguyên",
-            "summary": "An AI enthusiast with 3 years of experience, specializing in Natural Language Processing (NLP) and large language models (LLMs). Passionate about exploring open-source models and their applications in advanced reasoning tasks.",
-            "phone": "(+84) 0888.150.900",
+            "summary": "AI Engineer with 3 years of experience in artificial intelligence, focusing on large language models and multi-agent systems. Demonstrated ability in developing innovative solutions to complex problems using NLP techniques and knowledge graphs.",
+            "phone": "+84 888.150.900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": [
+                "https://www.linkedin.com/in/thai-thanh-nguyen"
+            ]
+        },
+        "work_experience": [
+            {
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-01",
+                "responsibilities": [
+                    "Developed multimodal RAG for multi-hop questions and image content",
+                    "Implemented context-aware chunking for PDFs",
+                    "Integrated open-source models with various output formats",
+                    "Designed multi-agent systems for collaborative tasks",
+                    "Utilized advanced prompt techniques for leveraging LLMs."
+                ],
+                "achievements": [
+                    "Contributed to innovative GenAI solutions",
+                    "Runner-up in internal hackathon for a car diagnostic chatbot",
+                    "Integrated a llamaCpp to support various functionalities in LangChain."
+                ]
+            },
+            {
+                "work_place": "KPMG Vietnam",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
+                "end_date": "2023-12-01",
+                "responsibilities": [
+                    "Developed a graph convolutional network model for information extraction from invoices",
+                    "Fine-tuned BERT for improved feature extraction",
+                    "Trained models using contrastive and triplet loss."
+                ],
+                "achievements": []
+            },
+            {
+                "work_place": "FPT Corporation",
+                "role": "AI Engineer",
+                "start_date": null,
+                "end_date": null,
+                "responsibilities": [],
+                "achievements": []
+            },
+            {
+                "work_place": "Others Company",
+                "role": "AI Engineer",
+                "start_date": null,
+                "end_date": null,
+                "responsibilities": [],
+                "achievements": []
+            }
+        ]
+    },
+    {
+        "person": {
+            "name": "Thái Thành Nguyên",
+            "summary": "An AI enthusiast with a deep interest in NLP, large language models, and agents, Thái Thành Nguyên has 3 years of experience in AI engineering. Throughout his internships at Bosch Global Software Technologies and QAI FPT Software, he worked on multimodal RAG models, graph convolutional networks, BERT fine-tuning, and innovative GenAI solutions. He holds a Bachelor's in Artificial Intelligence & Data Science from FPT University, with numerous certificates in AI design and data science.",
+            "phone": "+84 8888 150 900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": null
+        },
+        "work_experience": [
+            {
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-01",
+                "responsibilities": [
+                    "Develop fully, locally-hosted multimodal RAG for multi-hop questions and image content",
+                    "Implement context-aware chunking and PDF pre-processing",
+                    "Investigate open-source models for tool calling and structured output",
+                    "Design multi-agent systems for task completion",
+                    "Use prompt techniques like tree-of-thoughts, ReAct, Reflexion"
+                ],
+                "achievements": [
+                    "Contributed to innovative GenAI solutions",
+                    "Runner-up in a car diagnostic chatbot hackathon",
+                    "Contributed to LangChain with llamaCpp"
+                ]
+            },
+            {
+                "work_place": "Công ty Cổ phần Bán lẻ Kỹ thuật số FPT",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
+                "end_date": "2023-12-01",
+                "responsibilities": [
+                    "Develop graph convolutional network models for OCR",
+                    "Fine-tune BERT for enhanced feature leveraging",
+                    "Train with hard negative sampling for classification"
+                ],
+                "achievements": null
+            }
+        ]
+    },
+    {
+        "person": {
+            "name": "Thái Thành Nguyên",
+            "summary": "An AI enthusiast with 3 years of experience, specializing in NLP and large language models (LLMs). Skilled in implementing innovative machine learning solutions with a focus on open-source models and knowledge graphs for complex reasoning tasks.",
+            "phone": "+84 0888.150.900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": [
+                "https://www.linkedin.com/in/thanhnguyen159/"
+            ]
+        },
+        "work_experience": [
+            {
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-31",
+                "responsibilities": [
+                    "Develop fully, locally-hosted multimodal RAG capable of handling multi-hop questions, image content.",
+                    "Implement context-aware chunking and pre-processing of PDFs to extract tables, images contents.",
+                    "Investigate open-source models that integrate with tool calling, structured output, and JSON format.",
+                    "Design and implement multi-agent systems where multiple agents collaborate to complete tasks.",
+                    "Use prompt techniques such as tree-of-thoughts, ReAct, and Reflexion to generate test cases based on requirements."
+                ],
+                "achievements": [
+                    "Contributed to the development of innovative GenAI solutions for the department.",
+                    "Runner-up in an internal hackathon related to a car diagnostic chatbot.",
+                    "Contributed to LangChain by integrating a llamaCpp, supporting instructed chat, chain, and tool calling."
+                ]
+            },
+            {
+                "work_place": "Lazada Vietnam",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
+                "end_date": "2023-12-31",
+                "responsibilities": [
+                    "Develop a graph convolutional network model that extracts key information from invoice images (OCR).",
+                    "Fine-tune BERT by leveraging more features such as word-level and character-level features.",
+                    "Train with hard negative sampling in classification using contrastive learning and triplet loss."
+                ],
+                "achievements": []
+            }
+        ]
+    },
+    {
+        "person": {
+            "name": "Thái Thành Nguyên",
+            "summary": "An AI enthusiast with three years of experience and a strong focus on NLP, particularly in large language models and agent-based applications. Engaged in innovative projects that leverage open-source models to solve complex reasoning tasks.",
+            "phone": "+84 0888.150.900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": [
+                "https://www.linkedin.com/in/thanhnguyen159/"
+            ]
+        },
+        "work_experience": [
+            {
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-01",
+                "responsibilities": [
+                    "Develop fully, locally-hosted multimodal RAG capable of handling multi-hop questions and image content.",
+                    "Implement context-aware chunking and pre-processing of PDFs to extract tables and image contents.",
+                    "Investigate open-source models that integrate with tool calling, structured output, and JSON format.",
+                    "Design and implement multi-agent systems where multiple agents collaborate to complete tasks.",
+                    "Utilize prompting techniques such as tree-of-thoughts, ReAct, and Reflexion to generate test cases based on requirements."
+                ],
+                "achievements": [
+                    "Contributed to the development of innovative GenAI solutions for the department.",
+                    "Runner-up in an internal hackathon related to a car diagnostic chatbot.",
+                    "Contributed to LangChain by integrating a llamaCpp, supporting instructed chat, chain, and tool calling."
+                ]
+            },
+            {
+                "work_place": "QAI FPT Software",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
+                "end_date": "2023-12-01",
+                "responsibilities": [
+                    "Develop a graph convolutional network model that extracts key information from invoice images using OCR.",
+                    "Fine-tune BERT by leveraging more features such as word-level and character-level features.",
+                    "Train with hard negative sampling in classification using contrastive learning and triplet loss."
+                ],
+                "achievements": []
+            },
+            {
+                "work_place": null,
+                "role": "Nutritionist",
+                "start_date": null,
+                "end_date": null,
+                "responsibilities": [],
+                "achievements": []
+            }
+        ]
+    },
+    {
+        "person": {
+            "name": "Thái Thành Nguyên",
+            "summary": "An AI engineer with 3 years of experience, specializing in Natural Language Processing (NLP) and large language models (LLMs). Skilled in developing agentic applications and knowledge graphs to tackle complex reasoning tasks. Proven track record in internships demonstrating technical proficiency and innovative contributions in AI solutions.",
+            "phone": "+84 0888.150.900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": [
+                "https://www.linkedin.com/in/thanhnguyen159/"
+            ]
+        },
+        "work_experience": [
+            {
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-01",
+                "responsibilities": [
+                    "Develop fully, locally-hosted multimodal RAG capable of handling multi-hop questions and image content.",
+                    "Implement context-aware chunking and pre-processing of PDFs to extract tables and image contents.",
+                    "Investigate open-source models that integrate with tool calling, structured output, and JSON format.",
+                    "Design and implement multi-agent systems where multiple agents collaborate to complete tasks.",
+                    "Leverage prompt techniques such as tree-of-thoughts, ReAct, and Reflexion to generate test cases from requirements."
+                ],
+                "achievements": [
+                    "Contributed to the development of innovative GenAI solutions for the department.",
+                    "Runner-up in an internal hackathon related to a car diagnostic chatbot.",
+                    "Contributed to LangChain by integrating a llamaCpp, supporting instructed chat, chain, and tool calling."
+                ]
+            },
+            {
+                "work_place": "QAI FPT Software",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
+                "end_date": "2023-12-01",
+                "responsibilities": [
+                    "Develop a graph convolutional network model that extracts key information from invoice images (OCR).",
+                    "Fine-tune BERT by leveraging additional features such as word-level and character-level features.",
+                    "Utilize hard negative sampling in classification using contrastive learning and triplet loss."
+                ],
+                "achievements": []
+            },
+            {
+                "work_place": "FPT University",
+                "role": "Nutritionist",
+                "start_date": "2021-09-01",
+                "end_date": "2024-06-01",
+                "responsibilities": [
+                    "Specialize in Artificial Intelligence & Data Science",
+                    "Maintain a GPA of 3.5/4.0",
+                    "Focus on courses such as Python, SQL, Machine Learning, and Natural Language Processing."
+                ],
+                "achievements": []
+            },
+            {
+                "work_place": "Tran Dai Nghia High School for the Gifted",
+                "role": "Nutritionist",
+                "start_date": "2017-09-01",
+                "end_date": "2020-06-01",
+                "responsibilities": [
+                    "Completed high school with a focus on Mathematics",
+                    "Achieved a GPA of 9.1/10."
+                ],
+                "achievements": []
+            }
+        ]
+    },
+    {
+        "person": {
+            "name": "Thái Thành Nguyên",
+            "summary": "An AI enthusiast with 3 years of experience, focusing on NLP and large language models. He is skilled in developing innovative AI solutions, specifically in multimodal systems and agentic applications. Nominated as a runner-up in an internal hackathon for a car diagnostic chatbot and has contributed to open-source projects.",
+            "phone": "+84 0888.150.900",
             "dob": null,
             "location": "Ho Chi Minh City, Vietnam",
             "portfolio": [
@@ -74,9 +328,63 @@
                 "responsibilities": [
                     "Develop fully, locally-hosted multimodal RAG capable of handling multi-hop questions and image content.",
                     "Implement context-aware chunking and pre-processing of PDFs to extract tables and images.",
+                    "Investigate open-source models for tool calling and structured outputs.",
+                    "Design and implement multi-agent systems where multiple agents collaborate to complete tasks.",
+                    "Leverage prompt techniques for generating test cases based on requirements."
+                ],
+                "achievements": [
+                    "Contributed to innovative GenAI solutions for the department.",
+                    "Runner-up in an internal hackathon related to a car diagnostic chatbot.",
+                    "Contributed to LangChain by integrating a llamaCpp, supporting instructed chat, chain, and tool calling."
+                ]
+            },
+            {
+                "work_place": "QAI FPT Software",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
+                "end_date": "2023-12-01",
+                "responsibilities": [
+                    "Develop a graph convolutional network model that extracts key information from invoice images (OCR).",
+                    "Fine-tune BERT leveraging word-level and character-level features.",
+                    "Train models using hard negative sampling in classification with contrastive learning and triplet loss."
+                ],
+                "achievements": []
+            },
+            {
+                "work_place": "FPT University",
+                "role": "AI Engineer",
+                "start_date": "2021-01-01",
+                "end_date": "2024-01-01",
+                "responsibilities": [],
+                "achievements": [
+                    "GPA: 3.5/4.0, courses in Python, SQL, Machine Learning, Natural Language Processing, and more."
+                ]
+            }
+        ]
+    },
+    {
+        "person": {
+            "name": "Thái Thành Nguyên",
+            "summary": "An AI Engineer with 3 years of experience, specializing in Natural Language Processing (NLP) and large language models (LLMs). Passionate about exploring open-source models and their applications in advanced reasoning tasks.",
+            "phone": "+84 0888.150.900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": [
+                "https://www.linkedin.com/in/thanhnguyen159/"
+            ]
+        },
+        "work_experience": [
+            {
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-01",
+                "responsibilities": [
+                    "Develop fully, locally-hosted multimodal RAG capable of handling multi-hop questions, image content.",
+                    "Implement context-aware chunking and pre-processing of PDFs to extract tables, images contents.",
                     "Investigate open-source models that integrate with tool calling, structured output, and JSON format.",
-                    "Design and implement multi-agent systems for collaborative task completion.",
-                    "Utilize prompt techniques to leverage LLMs for generating test cases."
+                    "Design and implement multi-agent systems where multiple agents collaborate to complete tasks.",
+                    "Use prompt techniques such as tree-of-thoughts, ReAct, Reflexion to generate test cases based on requirements."
                 ],
                 "achievements": [
                     "Contributed to the development of innovative GenAI solutions for the department.",
@@ -85,29 +393,37 @@
                 ]
             },
             {
-                "work_place": "Bosch Global Software Technologies",
+                "work_place": "QAI FPT Software",
                 "role": "AI Engineer",
                 "start_date": "2023-08-01",
                 "end_date": "2023-12-01",
                 "responsibilities": [
-                    "Develop a graph convolutional network model for extracting key information from invoice images (OCR).",
-                    "Fine-tune BERT by leveraging additional features such as word-level and character-level features.",
-                    "Train with hard negative sampling in classification using contrastive learning and triplet loss."
+                    "Develop a graph convolutional network model that extracts key information from invoice images (OCR).",
+                    "Fine-tuning BERT by leveraging more features such as word-level and character-level features.",
+                    "Trained with hard negative sampling in classification using contrastive learning and triplet loss."
                 ],
+                "achievements": []
+            },
+            {
+                "work_place": null,
+                "role": "Position Others",
+                "start_date": "2017-01-01",
+                "end_date": "2020-01-01",
+                "responsibilities": null,
                 "achievements": []
             }
         ],
         "education": [
             {
-                "university": "FPT University",
+                "name_education": "FPT University",
                 "degree": "Bachelor Degree, Artificial Intelligence & Data Science",
                 "start_year": "2021-01-01",
                 "end_year": "2024-01-01",
                 "achievement": "GPA: 3.5/4.0"
             },
             {
-                "university": "Others University",
-                "degree": "High School Degree, Mathematics",
+                "name_education": "Tran Dai Nghia High School for the Gifted",
+                "degree": "High school Degree, Mathematics",
                 "start_year": "2017-01-01",
                 "end_year": "2020-01-01",
                 "achievement": "GPA: 9.1/10"
@@ -139,233 +455,511 @@
                 "category": "Data Science"
             }
         ],
-        "publications": null
+        "publications": []
     },
     {
         "person": {
-            "name": "PHẠM VĂN THIỆU",
-            "summary": "A motivated Software Engineer with 3 years of experience in Python backend development. Proficient in performance optimization, database management, and various frameworks including Django and FastAPI. Strong skills in Linux, Docker, and Git. Experienced in developing applications for CRM and English learning projects, with a focus on integrating third-party systems and optimizing application performance.",
-            "phone": null,
-            "dob": "1998-07-01",
-            "location": "46A, Tan Hoa 2 Street, Hiep Phu Ward, Thu Duc City, Ho Chi Minh City",
-            "portfolio": null
+            "name": "Thái Thành Nguyên",
+            "summary": "AI Engineer with 3 years of experience, specializing in NLP and large language models. Passionate about exploring open-source models and their application in complex reasoning tasks.",
+            "phone": "(+84) 0888.150.900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": [
+                "https://www.linkedin.com/in/thanhnguyen159/"
+            ]
         },
         "work_experience": [
             {
-                "work_place": "Others Company",
-                "role": "Software Engineer",
-                "start_date": "2022-03-01",
-                "end_date": null,
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-01",
                 "responsibilities": [
-                    "Develop Unify CRM application using Django Framework and RESTful API.",
-                    "Integrate core and third-party systems.",
-                    "Solve performance optimization problems.",
-                    "Develop APIs for web and mobile applications."
+                    "Develop fully, locally-hosted multimodal RAG capable of handling multi-hop questions and image content.",
+                    "Implement context-aware chunking and pre-processing of PDFs to extract tables and images.",
+                    "Investigate open-source models that integrate with tool calling, structured output, and JSON format.",
+                    "Design and implement multi-agent systems where multiple agents collaborate to complete tasks.",
+                    "Use prompt techniques like tree-of-thoughts, ReAct, and Reflexion for generating test cases."
                 ],
-                "achievements": null
+                "achievements": [
+                    "Contributed to the development of innovative GenAI solutions.",
+                    "Runner-up in an internal hackathon for a car diagnostic chatbot.",
+                    "Contributed to LangChain by integrating a llamaCpp."
+                ]
             },
             {
-                "work_place": "Others Company",
-                "role": "Software Engineer",
-                "start_date": "2023-04-01",
+                "work_place": "QAI FPT Software",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
                 "end_date": "2023-12-01",
                 "responsibilities": [
-                    "Development of the Writing application for English learning using Fast API.",
-                    "Integrate core and third-party systems with GPT chat.",
-                    "Manage project tasks and ensure timely completion."
+                    "Develop a graph convolutional network model for extracting key information from invoices via OCR.",
+                    "Fine-tune BERT leveraging word-level and character-level features.",
+                    "Train with hard negative sampling for classification using contrastive learning."
                 ],
-                "achievements": null
+                "achievements": []
             },
             {
-                "work_place": "Others Company",
-                "role": "Software Engineer",
-                "start_date": "2021-08-01",
-                "end_date": "2022-01-01",
-                "responsibilities": [
-                    "Deploy VoIP call center system for clients.",
-                    "Develop software for sample recognition using Python and OpenCV."
-                ],
-                "achievements": null
+                "work_place": "Tran Dai Nghia High School for the Gifted",
+                "role": "Nutritionist",
+                "start_date": "2017-01-01",
+                "end_date": "2020-01-01",
+                "responsibilities": [],
+                "achievements": []
             }
         ],
         "education": [
             {
-                "university": "Posts and Telecommunications Institute of Technology",
-                "degree": "Bachelor's Degree",
-                "start_year": "2017-09-01",
-                "end_year": "2022-01-01",
-                "achievement": null
+                "name_education": "FPT University",
+                "degree": "Bachelor Degree",
+                "start_year": "2021-01-01",
+                "end_year": "2024-01-01",
+                "achievement": "GPA: 3.5/4.0, Courses: Python, SQL, Machine Learning, NLP, etc."
+            },
+            {
+                "name_education": "Tran Dai Nghia High School for the Gifted",
+                "degree": "High School Degree",
+                "start_year": "2017-01-01",
+                "end_year": "2020-01-01",
+                "achievement": "GPA: 9.1/10"
             }
         ],
         "certification": [
             {
-                "name": "Certificate of Student Research in EUREKA Science Fair",
-                "category": "Information Technology"
+                "name": "Venture Leader Scholarship Recipient",
+                "category": "Artificial Intelligence"
             },
             {
-                "name": "Certificate of Student Research at the Academic Level 2020",
-                "category": "Information Technology"
+                "name": "AI Agentic Design Patterns/ AI Agents in LangGraph/RL",
+                "category": "Artificial Intelligence"
             },
             {
-                "name": "Certificate of Student Research at the Academic Level 2021",
-                "category": "Information Technology"
+                "name": "Probability - The Science of Uncertainty and Data",
+                "category": "Data Science"
+            },
+            {
+                "name": "Applied Data Science Lab",
+                "category": "Data Science"
+            },
+            {
+                "name": "Machine Learning Specialization",
+                "category": "Artificial Intelligence"
+            },
+            {
+                "name": "Achieving a position in the top 5% of the leaderboard in WIDS Datathon 2023",
+                "category": "Data Science"
             }
         ],
+        "publications": []
+    },
+    {
+        "person": {
+            "name": "Thái Thành Nguyên",
+            "summary": "An AI enthusiast with 3 years of experience in AI, specializing in natural language processing (NLP) and large language models (LLMs). Driven by exploring the potential of open-source models and agentic applications to solve complex reasoning tasks.",
+            "phone": "(+84) 0888.150.900",
+            "dob": null,
+            "location": "Ho Chi Minh City, Vietnam",
+            "portfolio": [
+                "https://www.linkedin.com/in/thanhnguyen159/"
+            ]
+        },
+        "work_experience": [
+            {
+                "work_place": "Bosch Global Software Technologies",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": "2024-07-01",
+                "responsibilities": [
+                    "Develop fully, locally-hosted multimodal RAG capable of handling multi-hop questions, image content.",
+                    "Implement context-aware chunking and pre-processing of PDFs to extract tables and images.",
+                    "Investigate open-source models for integration with tool calling and structured output.",
+                    "Design and implement multi-agent systems for collaborative tasks.",
+                    "Leverage LLMs using prompt techniques like tree-of-thoughts and ReAct for generating test cases."
+                ],
+                "achievements": [
+                    "Contributed to the development of innovative GenAI solutions.",
+                    "Runner-up in an internal hackathon related to a car diagnostic chatbot.",
+                    "Contributed to LangChain by integrating llamaCpp for instructed chat and tool calling."
+                ]
+            },
+            {
+                "work_place": "QAI FPT Software",
+                "role": "AI Engineer",
+                "start_date": "2023-08-01",
+                "end_date": "2023-12-01",
+                "responsibilities": [
+                    "Develop a graph convolutional network model for key information extraction from invoices using OCR.",
+                    "Fine-tune BERT with additional features like word-level and character-level features.",
+                    "Train classification models with hard negative sampling, contrastive learning, and triplet loss."
+                ],
+                "achievements": []
+            }
+        ],
+        "education": [
+            {
+                "name_education": "FPT University",
+                "degree": "Bachelor Degree, Artificial Intelligence & Data Science",
+                "start_year": "2021-01-01",
+                "end_year": "2024-01-01",
+                "achievement": "GPA: 3.5/4.0"
+            },
+            {
+                "name_education": "Tran Dai Nghia High School for the Gifted",
+                "degree": "High school Degree, Mathematics",
+                "start_year": "2017-01-01",
+                "end_year": "2020-01-01",
+                "achievement": "GPA: 9.1/10"
+            }
+        ],
+        "certification": [
+            {
+                "name": "Venture Leader Scholarship Recipient",
+                "category": "Entrepreneurship"
+            },
+            {
+                "name": "AI Agentic Design Patterns/ AI Agents in LangGraph/RL from Human Feedback",
+                "category": "Artificial Intelligence"
+            },
+            {
+                "name": "Probability - The Science of Uncertainty and Data/ Fundamental of Statistics",
+                "category": "Data Science"
+            },
+            {
+                "name": "Applied Data Science Lab",
+                "category": "Data Science"
+            },
+            {
+                "name": "Machine Learning Specialization/ Natural Language Processing Specialization",
+                "category": "Data Science"
+            },
+            {
+                "name": "Achieving a position in the top 5% of the leaderboard in WIDS Datathon 2023",
+                "category": "Data Science"
+            }
+        ],
+        "publications": []
+    },
+    {
+        "person": {
+            "name": "Hà Bùi",
+            "summary": "A software developer with 7 years of experience in ERP software development and implementation, focusing on full-stack development, automation tools, and IoT systems. Enthusiastic about technology research and efficient coding practices.",
+            "phone": null,
+            "dob": "1994-11-16",
+            "location": "Hanoi, Vietnam",
+            "portfolio": null
+        },
+        "work_experience": [
+            {
+                "work_place": "EASTERN SUN",
+                "role": "Research Scientist",
+                "start_date": "2018-01-01",
+                "end_date": "2024-01-01",
+                "responsibilities": [
+                    "Manage and plan tasks assigned by the director.",
+                    "Analyze and optimize existing functionalities to enhance performance and reduce processing time.",
+                    "Participate in meetings to consult solutions for clients."
+                ],
+                "achievements": [
+                    "Architected the ERP system framework for the company.",
+                    "Handled complex programming problems encountered by colleagues."
+                ]
+            },
+            {
+                "work_place": "EASTERN SUN",
+                "role": "Software Engineer",
+                "start_date": "2016-09-01",
+                "end_date": "2024-01-01",
+                "responsibilities": [
+                    "Program functional modules using C# MVC Core 2.1.",
+                    "Develop RESTful APIs in C#.",
+                    "Create front-end interfaces with HTML, JavaScript, jQuery, and AngularJS.",
+                    "Program modules on SharePoint.",
+                    "Develop WinForms applications communicating with MES hardware.",
+                    "Mobile development using C# with Xamarin and React Native."
+                ],
+                "achievements": []
+            }
+        ],
+        "education": [
+            {
+                "name_education": "Hanoi University of Industry",
+                "degree": "Bachelor",
+                "start_year": "2012-01-01",
+                "end_year": "2016-12-01",
+                "achievement": null
+            }
+        ],
+        "certification": null,
         "publications": null
     },
     {
         "person": {
-            "name": "Vũ Đức Độ",
-            "summary": "AI Engineer with over 3 years of experience in product companies, specializing in building systems and solving problems using Machine Learning and AI technology. Skilled in data collection, processing, management, and analysis.",
+            "name": "NGUYỄN VĂN TRUNG",
+            "summary": "A skilled programmer with a bachelor's degree in Information Technology, seeking effective work experiences while enhancing professional skills. Passionate about learning and sharing knowledge with colleagues.",
             "phone": null,
-            "dob": null,
-            "location": "Cầu Giấy, Hà Nội",
+            "dob": "1995-05-01",
+            "location": "Phạm đôn, Tphcm",
             "portfolio": null
         },
         "work_experience": [
             {
-                "work_place": "FPT Corporation",
-                "role": "AI Engineer",
-                "start_date": "2021-01-01",
-                "end_date": null,
+                "work_place": "MEDIA QC",
+                "role": "IT Support Specialist",
+                "start_date": "2018-01-01",
+                "end_date": "2020-05-01",
                 "responsibilities": [
-                    "Researching and developing Real Estate Price Prediction System by machine learning.",
-                    "Researching and developing Recommendation System.",
-                    "Researching Text to Speech project."
-                ],
-                "achievements": null
-            },
-            {
-                "work_place": "Others Company",
-                "role": "Data Scientist",
-                "start_date": "2017-01-01",
-                "end_date": "2019-01-01",
-                "responsibilities": [
-                    "Testing and defining website vulnerability.",
-                    "Using Linux, deploy environment for case studies.",
-                    "Using Python for resolving issues such as crawling information, processing data, automatic modules."
-                ],
-                "achievements": null
-            }
-        ],
-        "education": [
-            {
-                "university": "FPT University",
-                "degree": "Very Good (3.39/4)",
-                "start_year": "2015-01-01",
-                "end_year": "2020-01-01",
-                "achievement": "Top 1 graduation project"
-            }
-        ],
-        "certification": null,
-        "publications": [
-            {
-                "category": "Artificial Intelligence",
-                "conference_name": "The 23rd National Conference on Information Technology and Communication",
-                "date": "2020-01-01"
-            }
-        ]
-    },
-    {
-        "person": {
-            "name": "TRAN NGOC THI",
-            "summary": "Dedicated and experienced ReactJS Developer with 4 years of hands-on experience in building robust and efficient web applications. Passionate about exploring and challenging myself by applying new technologies to projects. Committed to delivering high-quality solutions that meet both user needs and business objectives.",
-            "phone": null,
-            "dob": "1995-10-10",
-            "location": "Phường Long Thạch Mỹ, Quận 9",
-            "portfolio": null
-        },
-        "work_experience": [
-            {
-                "work_place": "FPT Software",
-                "role": "Software Engineer",
-                "start_date": "2019-08-01",
-                "end_date": "2021-01-31",
-                "responsibilities": [
-                    "Participated in requirements analysis",
-                    "Designed and implemented new features of the application",
-                    "Assisted in handling and resolving technical issues"
-                ],
-                "achievements": null
-            },
-            {
-                "work_place": "FPT Software",
-                "role": "Software Engineer",
-                "start_date": "2021-01-31",
-                "end_date": null,
-                "responsibilities": [
-                    "Collaborated with talented colleagues on engaging software projects",
-                    "Enhanced teamwork and technical skills"
-                ],
-                "achievements": null
-            },
-            {
-                "work_place": "FPT Software",
-                "role": "Software Engineer",
-                "start_date": "2019-08-01",
-                "end_date": "2021-01-31",
-                "responsibilities": [
-                    "Led the perfect pixel conversion project aimed at transitioning UI elements from Internet Explorer to Chrome and Edge browsers"
-                ],
-                "achievements": null
-            },
-            {
-                "work_place": "FPT Software",
-                "role": "Software Engineer",
-                "start_date": "2021-01-31",
-                "end_date": "2024-08-31",
-                "responsibilities": [
-                    "Built common components",
-                    "Collaborated closely with the Backend team to integrate the interface with services and databases",
-                    "Created screens of the website based on design"
-                ],
-                "achievements": null
-            },
-            {
-                "work_place": "FPT Software",
-                "role": "Software Engineer",
-                "start_date": "2021-09-01",
-                "end_date": "2022-02-28",
-                "responsibilities": [
-                    "Developed custom components following the design guidelines",
-                    "Packaged components into npm packages for easy distribution and reuse",
-                    "Collaborated with the design team to ensure consistency"
-                ],
-                "achievements": null
-            },
-            {
-                "work_place": "FPT Software",
-                "role": "Software Engineer",
-                "start_date": "2022-02-28",
-                "end_date": "2023-12-31",
-                "responsibilities": [
-                    "Played a key role in developing self-service checkout applications",
-                    "Contributed to optimizing logistics management systems",
-                    "Assisted in implementing real-time inventory management systems"
+                    "Programming and building websites for US and Japanese clients.",
+                    "Creating pixel-perfect websites from Figma and Photoshop as per client requirements.",
+                    "SEO optimization to rank content on the market.",
+                    "Participating in developing/integrating systems on social platforms and SSO.",
+                    "Providing technical support to clients during usage.",
+                    "Maintaining, securing, and virus-proofing systems."
                 ],
                 "achievements": [
-                    "Recognized as an exemplary digital transformation award-winning enterprise in 2022"
+                    "Successfully completed multiple website projects."
                 ]
             },
             {
-                "work_place": "FPT Software",
-                "role": "Software Engineer",
-                "start_date": "2023-01-01",
-                "end_date": null,
+                "work_place": "ITSABEAUTIFULWAY",
+                "role": "Project Lead",
+                "start_date": "2019-11-01",
+                "end_date": "2022-09-01",
                 "responsibilities": [
-                    "Developed and maintained responsive user interfaces using ReactJS",
-                    "Ensured cross-browser compatibility and optimal performance"
+                    "Programming and building websites.",
+                    "Redesigning databases.",
+                    "Creating pixel-perfect websites from Figma and Photoshop as per client requirements.",
+                    "Calculating user activities."
                 ],
-                "achievements": null
+                "achievements": [
+                    "Successfully completed multiple website projects."
+                ]
+            },
+            {
+                "work_place": "CÔNG TY ĐIỆN LỰC HÀ NỘI",
+                "role": "Web Developer",
+                "start_date": "2020-05-01",
+                "end_date": "2020-10-01",
+                "responsibilities": [
+                    "Programming and building websites for Japanese clients.",
+                    "Performing tasks assigned by the department head.",
+                    "Redesigning databases."
+                ],
+                "achievements": [
+                    "Developed a quiz website for recruitment purposes."
+                ]
             }
         ],
         "education": [
             {
-                "university": "Others University",
-                "degree": "Bachelor's in Physics",
-                "start_year": "2013-01-01",
-                "end_year": "2019-01-01",
-                "achievement": null
+                "name_education": "ĐẠI HỌC HỮU NGHỊ VIỆT HÀN",
+                "degree": "Bachelor",
+                "start_year": "2015-01-01",
+                "end_year": "2018-01-01",
+                "achievement": "Graduated with excellent results."
+            }
+        ],
+        "certification": null,
+        "publications": null
+    },
+    {
+        "person": {
+            "name": "NGUYỄN VĂN TRUNG",
+            "summary": "A motivated and dedicated programmer with a solid background in IT and web development. Strives for continuous learning and improvement.",
+            "phone": null,
+            "dob": "1995-05-01",
+            "location": "Phạm Đôn, TPHCM",
+            "portfolio": null
+        },
+        "work_experience": [
+            {
+                "work_place": "MEDIA QC",
+                "role": "IT Support Specialist",
+                "start_date": "2018-01-01",
+                "end_date": "2020-05-01",
+                "responsibilities": [
+                    "Developed and built websites for US and Japanese clients.",
+                    "Created pixel-perfect websites using Figma and Photoshop as per client requirements.",
+                    "SEO optimized website content to rank in top markets.",
+                    "Participated in the development/integration of systems with social platforms.",
+                    "Provided technical support and troubleshooting for clients.",
+                    "Maintained and secured system, including virus removal."
+                ],
+                "achievements": [
+                    "Successfully completed several website projects."
+                ]
+            },
+            {
+                "work_place": "ITSABEAUTIFULWAY",
+                "role": "Project Lead",
+                "start_date": "2019-11-01",
+                "end_date": "2022-09-01",
+                "responsibilities": [
+                    "Programmed and constructed various websites.",
+                    "Redesigned database systems.",
+                    "Developed websites from scratch based on client specifications using design tools.",
+                    "Calculated user activity metrics."
+                ],
+                "achievements": [
+                    "Accomplished multiple website projects successfully."
+                ]
+            },
+            {
+                "work_place": "CÔNG TY ĐIỆN LỰC HÀ NỘI",
+                "role": "IT Support Specialist",
+                "start_date": "2020-05-01",
+                "end_date": "2020-10-01",
+                "responsibilities": [
+                    "Developed websites for Japanese clients.",
+                    "Executed tasks assigned by the department head.",
+                    "Redesigned database schemas."
+                ],
+                "achievements": [
+                    "Completed a quiz website aimed at recruitment for company workers."
+                ]
+            }
+        ],
+        "education": [
+            {
+                "name_education": "ĐẠI HỌC HỮU NGHỊ VIỆT HÀN",
+                "degree": "Bachelor",
+                "start_year": "2015-01-01",
+                "end_year": "2018-01-01",
+                "achievement": "Graduated with honors."
+            }
+        ],
+        "certification": null,
+        "publications": null
+    },
+    {
+        "person": {
+            "name": "NGUYỄN VĂN TRUNG",
+            "summary": "A dedicated programmer with a strong educational background and a solid experience in web development. Highly skilled in PHP, OOP, WordPress, and various programming technologies.",
+            "phone": null,
+            "dob": "1995-05-01",
+            "location": "Phạm đôn, Tphcm",
+            "portfolio": null
+        },
+        "work_experience": [
+            {
+                "work_place": "MEDIA QC",
+                "role": "IT Support Specialist",
+                "start_date": "2018-01-01",
+                "end_date": "2020-05-01",
+                "responsibilities": [
+                    "Programming and building websites for clients in the US and Japan.",
+                    "Creating websites from Figma and Photoshop to meet client requirements.",
+                    "SEO content to rank on search engines.",
+                    "Participating in the development and integration of systems on social platforms with website integration."
+                ],
+                "achievements": [
+                    "Successfully completed several website projects."
+                ]
+            },
+            {
+                "work_place": "ITSABEAUTIFULWAY",
+                "role": "Project Lead",
+                "start_date": "2019-11-01",
+                "end_date": "2022-09-01",
+                "responsibilities": [
+                    "Programming and building websites.",
+                    "Redesigning databases.",
+                    "Creating websites from Figma and Photoshop to meet client specifications."
+                ],
+                "achievements": [
+                    "Successfully completed various website projects."
+                ]
+            },
+            {
+                "work_place": "CÔNG TY ĐIỆN LỰC HÀ NỘI",
+                "role": "Position Others",
+                "start_date": "2020-05-01",
+                "end_date": "2020-10-01",
+                "responsibilities": [
+                    "Programming and building websites for Japanese clients.",
+                    "Performing tasks assigned by the department head.",
+                    "Redesigning databases."
+                ],
+                "achievements": [
+                    "Completed a quiz website aimed at staffing recruitment."
+                ]
+            }
+        ],
+        "education": [
+            {
+                "name_education": "ĐẠI HỌC HỮU NGHỊ VIỆT HÀN",
+                "degree": "Bachelor's",
+                "start_year": "2015-01-01",
+                "end_year": "2018-01-01",
+                "achievement": "Graduated with distinction."
+            }
+        ],
+        "certification": null,
+        "publications": null
+    },
+    {
+        "person": {
+            "name": "Nguyễn Văn Trung",
+            "summary": "Nguyễn Văn Trung is an adept programmer with significant experience in website development and IT support. He is proficient in multiple programming languages and has a successful record of boosting SEO rankings for websites.",
+            "phone": null,
+            "dob": "1995-05-01",
+            "location": "Phạm Đôn, Ho Chi Minh City, Vietnam",
+            "portfolio": null
+        },
+        "work_experience": [
+            {
+                "work_place": "Media QC",
+                "role": "IT Support Specialist",
+                "start_date": "2018-01-01",
+                "end_date": "2020-05-01",
+                "responsibilities": [
+                    "Developed and built websites for US and Japanese clients",
+                    "Created pixel-perfect websites from Figma and Photoshop",
+                    "SEO optimization of website content",
+                    "Developed/integrated systems on platforms with social websites, SSO (Facebook, Twitter, Instagram)",
+                    "Provided technical support and troubleshooting during customer usage",
+                    "System maintenance, security, and virus elimination"
+                ],
+                "achievements": [
+                    "Successfully completed numerous website projects"
+                ]
+            },
+            {
+                "work_place": "ItsaBeautifulWay",
+                "role": "Project Lead",
+                "start_date": "2019-11-01",
+                "end_date": "2022-09-01",
+                "responsibilities": [
+                    "Developed and built websites",
+                    "Redesigned database structures",
+                    "Created pixel-perfect websites from Figma and Photoshop",
+                    "Calculated user interaction activities"
+                ],
+                "achievements": [
+                    "Successfully completed numerous website projects"
+                ]
+            },
+            {
+                "work_place": "Hanoi Electricity Company",
+                "role": "IT Support Specialist",
+                "start_date": "2020-05-01",
+                "end_date": "2020-10-01",
+                "responsibilities": [
+                    "Developed and built a client's website for a Japanese company",
+                    "Performed tasks assigned by department head",
+                    "Redesigned database"
+                ],
+                "achievements": [
+                    "Successfully completed a multiple-choice examination website for recruiting purposes"
+                ]
+            }
+        ],
+        "education": [
+            {
+                "name_education": "Vietnam - Korea University of Friendship",
+                "degree": "Bachelor in Information Technology",
+                "start_year": "2015-01-01",
+                "end_year": "2018-01-01",
+                "achievement": "Graduated with excellence"
             }
         ],
         "certification": null,

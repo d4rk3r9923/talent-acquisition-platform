@@ -1,18 +1,31 @@
+import os
 import fitz
 import json
 import uuid
 from collections import defaultdict
 from datetime import datetime
+import base64
 from pydantic import BaseModel
 from typing import ClassVar
 from enum import Enum
-
+from PIL import Image
+from openai import OpenAI
+from pdf2image import convert_from_path
+from app.references.client import openai_client
 
 class Color(BaseModel):
     # ANSI escape codes for red and reset
     RED: ClassVar[str] = "\033[91m"
     GREEN: ClassVar[str] = "\033[92m"
     RESET: ClassVar[str] = "\033[0m"
+
+
+def get_embedding(text, 
+                  model="text-embedding-3-small", 
+                  client= openai_client,
+    ):
+   text = text.replace("\n", " ")
+   return client.embeddings.create(input =[text], model=model).data[0].embedding
 
 
 async def read_content_pdf(file_path):
@@ -62,6 +75,50 @@ async def read_content_pdf(file_path):
             text += "\n\n"  # Separate pages with a newline
     
     return text
+  
+
+async def pdf_to_single_image(
+        pdf_path, 
+        output_image="output_image.png", 
+        orientation="vertical",
+        zoom=3,
+):
+    # Open the PDF file
+    pdf_document = fitz.open(pdf_path)
+    images = []
+    
+    # Render each page as an image with higher quality
+    for page_number in range(pdf_document.page_count):
+        page = pdf_document[page_number]
+        # Apply scaling for higher resolution
+        matrix = fitz.Matrix(zoom, zoom)
+        pix = page.get_pixmap(matrix=matrix)
+        img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+        images.append(img)
+
+    # Determine the dimensions for the combined image
+    widths, heights = zip(*(img.size for img in images))
+
+    if orientation == "vertical":
+        total_width = max(widths)
+        total_height = sum(heights)
+        combined_image = Image.new("RGB", (total_width, total_height))
+        y_offset = 0
+        for img in images:
+            combined_image.paste(img, (0, y_offset))
+            y_offset += img.height
+    else:
+        total_width = sum(widths)
+        total_height = max(heights)
+        combined_image = Image.new("RGB", (total_width, total_height))
+        x_offset = 0
+        for img in images:
+            combined_image.paste(img, (x_offset, 0))
+            x_offset += img.width
+
+    # Save the combined image
+    combined_image.save(output_image)
+    return f"{os.path.abspath(output_image)}"
 
 
 def create_enum_from_objects(object_list, enum_name):

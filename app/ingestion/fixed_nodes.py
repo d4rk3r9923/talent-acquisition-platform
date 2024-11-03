@@ -14,7 +14,7 @@ from app.preprocessing.fixed_schema import (
     list_universites,
     list_workplaces,
 )
-from app.utils.util import Color
+from app.references.util import Color
 
 load_dotenv()
 
