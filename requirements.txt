@@ -1,0 +1,11 @@
+pandas
+PyMuPDF
+pytesseract
+pdf2image
+python-dotenv
+neo4j
+loguru
+pydantic
+openai
+langchain-openai
+langchain-ollama
