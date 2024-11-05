@@ -11,8 +11,8 @@ from app.preprocessing.fixed_schema import (
     list_positions,
     list_publications,
     list_skills,
-    list_universites,
-    list_workplaces,
+    # list_universites,
+    # list_workplaces,
 )
 from app.references.util import Color
 
@@ -34,26 +34,26 @@ def generate_uuid(value):
 
 
 def prepare_nodes():
-    university_nodes = [
-        {"id": generate_uuid(uni.name), "name": uni.name, "field": uni.field}
-        for uni in list_universites
-    ]
+    # university_nodes = [
+    #     {"id": generate_uuid(uni.name), "name": uni.name, "field": uni.field}
+    #     for uni in list_universites
+    # ]
 
-    workplace_nodes = [
-        {
-            "id": generate_uuid(wp.name),
-            "name": wp.name,
-            "domain_expertise": wp.domain_expertise,
-            "size": wp.size,
-        }
-        for wp in list_workplaces
-    ]
+    # workplace_nodes = [
+    #     {
+    #         "id": generate_uuid(wp.name),
+    #         "name": wp.name,
+    #         "domain_expertise": wp.domain_expertise,
+    #         "size": wp.size,
+    #     }
+    #     for wp in list_workplaces
+    # ]
 
     position_nodes = [
         {
             "id": generate_uuid(pos.name),
             "name": pos.name,
-            "description": pos.description,
+            # "description": pos.description,
         }
         for pos in list_positions
     ]
@@ -78,8 +78,8 @@ def prepare_nodes():
     ]
 
     return (
-        university_nodes,
-        workplace_nodes,
+        # university_nodes,
+        # workplace_nodes,
         position_nodes,
         skill_nodes,
         certification_nodes,
@@ -90,19 +90,19 @@ def prepare_nodes():
 async def create_constraints(driver):
     async with driver.session() as session:
         try:
-            await session.run(
-                "CREATE CONSTRAINT IF NOT EXISTS FOR (n:University) REQUIRE n.id IS UNIQUE"
-            )
-            logger.info(
-                f"{Color.GREEN}Unique constraint created for University nodes"
-            )
+            # await session.run(
+            #     "CREATE CONSTRAINT IF NOT EXISTS FOR (n:University) REQUIRE n.id IS UNIQUE"
+            # )
+            # logger.info(
+            #     f"{Color.GREEN}Unique constraint created for University nodes"
+            # )
 
-            await session.run(
-                "CREATE CONSTRAINT IF NOT EXISTS FOR (n:Workplace) REQUIRE n.id IS UNIQUE"
-            )
-            logger.info(
-                f"{Color.GREEN}Unique constraint created for Workplace nodes"
-            )
+            # await session.run(
+            #     "CREATE CONSTRAINT IF NOT EXISTS FOR (n:Workplace) REQUIRE n.id IS UNIQUE"
+            # )
+            # logger.info(
+            #     f"{Color.GREEN}Unique constraint created for Workplace nodes"
+            # )
 
             await session.run(
                 "CREATE CONSTRAINT IF NOT EXISTS FOR (n:Position) REQUIRE n.id IS UNIQUE"
@@ -159,16 +159,16 @@ async def main():
     await create_constraints(driver)
 
     (
-        university_nodes,
-        workplace_nodes,
+        # university_nodes,
+        # workplace_nodes,
         position_nodes,
         skill_nodes,
         certification_nodes,
         publication_nodes,
     ) = prepare_nodes()
 
-    await add_nodes_to_db(driver, university_nodes, "University")
-    await add_nodes_to_db(driver, workplace_nodes, "Workplace")
+    # await add_nodes_to_db(driver, university_nodes, "University")
+    # await add_nodes_to_db(driver, workplace_nodes, "Workplace")
     await add_nodes_to_db(driver, position_nodes, "Position")
     await add_nodes_to_db(driver, skill_nodes, "Skill")
     await add_nodes_to_db(driver, certification_nodes, "Certification")
