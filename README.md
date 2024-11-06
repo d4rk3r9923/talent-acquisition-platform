@@ -5,3 +5,5 @@
 3. [ ] Duy Minh: Sáng mai xong relationship experience, Tối code LangGraph HR Agent (expect chiều chủ nhật)
 4. [x] N.Nguyen: Sáng chủ nhật xong phần evaluate.
 5. [x] Review 2: Collect Data, Pre-processing PDF, Import db to Neo4j, Synthetic Data, Fine-tuning Model, Evaluate.
+6. [ ] Filter (k co = None), Embedding Comparison, Partial Filter.
+7. [ ] Entity Extraction from user input to put into filter.
