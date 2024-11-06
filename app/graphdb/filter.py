@@ -46,6 +46,10 @@ async def create_query(data):
 
     query += "RETURN p.name AS Candidates"
     
+    with open("./app/graphdb/filter.cql", "w") as f:
+        f.write("// Generated query\n")
+        f.write(query)
+
     logger.info(f"{g}Generated query:{q}\n{query}")
     return query
 
