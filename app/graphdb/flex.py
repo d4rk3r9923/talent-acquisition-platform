@@ -160,6 +160,32 @@ async def create_flex_nodes(driver, person_data):
                     )
                     logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Education {q}{education_props['name']} with STUDIED_AT relationship")
 
+                # Connect Positions to Person
+                for position in person.get("positions", []):
+                    position_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, position["role"]))  # Unique UUID for each position based on role name
+                    position_props = {
+                        "id": position_id,
+                        "name": position["role"]
+                    }
+                    relationship_props = {
+                        "duration": position.get("duration"),
+                        "responsibilities": position.get("responsibilities", []),
+                        "achievements": position.get("achievements", [])
+                    }
+                    await session.run(
+                        """
+                        MATCH (pos:Position {id: $position_id}), (p:Person {id: $person_id})
+                        MERGE (p)-[r:WORKED_AS]->(pos)
+                        SET r.duration = $relationship_props.duration,
+                            r.responsibilities = $relationship_props.responsibilities,
+                            r.achievements = $relationship_props.achievements
+                        """,
+                        position_id=position_id,
+                        person_id=person_props["id"],
+                        relationship_props=relationship_props,
+                    )
+                    logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Position {q}{position_props['name']} with WORKED_AS relationship")
+
                 # Connect Projects to Person
                 for project in person.get("list_project", []):
                     project_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, project["name"]))  # Unique UUID for each project based on name
@@ -189,7 +215,7 @@ async def create_flex_nodes(driver, person_data):
                     logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Project {q}{project_props['name']} with DID relationship")
 
             except Exception as e:
-                logger.error(f"{r}Error adding Person node or relationships for {q}{person_props['name']}: {e}")
+                logger.error(f"{r}Error adding Person node or relationships for {q}{person_props['name']}: {q}{e}")
 
 
 async def create_constraints(driver):
@@ -225,6 +251,11 @@ async def create_constraints(driver):
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:WORKED_AT]-() REQUIRE r.role IS NOT NULL
                 """
             )
+            # await session.run(
+            #     """
+            #     CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:WORKED_AT]-() REQUIRE r.start_date IS NOT NULL
+            #     """
+            # )
             await session.run(
                 """
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:WORKED_AT]-() REQUIRE r.responsibilities IS NOT NULL
@@ -242,16 +273,27 @@ async def create_constraints(driver):
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:STUDIED_AT]-() REQUIRE r.degree IS UNIQUE
                 """
             )
-            logger.info(f"{g}Constraint created for STUDIED_AT relationships")
+            # await session.run(
+            #     """
+            #     CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:STUDIED_AT]-() REQUIRE r.start_year IS NOT NULL
+            #     """
+            # )
+            # logger.info(f"Constraint created for STUDIED_AT relationships")
             await session.run(
                 """
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:EARNED]-() REQUIRE r.name IS UNIQUE
                 """
             )
             logger.info(f"{g}Constraint created for EARNED relationships")
+            # await session.run(
+            #     """
+            #     CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:PUBLISHED]-() REQUIRE r.conference_name IS UNIQUE
+            #     """
+            # )
+            # logger.info(f"Constraint created for PUBLISHED relationships")
 
         except Exception as e:
-            logger.error(f"{r}Error creating constraints: {e}")
+            logger.error(f"{r}Error creating constraints: {q}{e}")
 
 
 async def main():
@@ -260,7 +302,7 @@ async def main():
 
     try:
         driver = await connect_to_neo4j(NEO4J_URI, NEO4J_DATABASE, NEO4J_USERNAME, NEO4J_PASSWORD)
-        logger.info(f"{g}Connected to Neo4j")
+        logger.info(f"{g}Connected to Neo4j database")
         await create_constraints(driver)
         await create_flex_nodes(driver, candidate_data)
         logger.info(f"{g}Successfully added person nodes and relationships")
@@ -268,7 +310,7 @@ async def main():
         logger.error(f"{r}Error in main process: {q}{e}")
     finally:
         await driver.close()
-        logger.info(f"{g}Disconnected from Neo4j")
+        logger.info(f"{g}Closed the Neo4j driver")
 
 
 if __name__ == "__main__":
