@@ -80,16 +80,16 @@ async def create_flex_nodes(driver, person_data):
                     logger.info(f"Linked Person {person_props['name']} to Certification {cert['category']}")
                 
                 # Connect existing Publications to Person node
-                # for pub in person.get("list_publications", []):
-                #     await session.run(
-                #         """
-                #         MATCH (pub:Publication {field: $pub_category}), (p:Person {id: $person_id})
-                #         MERGE (p)-[:PUBLISHED]->(pub)
-                #         """,
-                #         pub_category=pub["category"],
-                #         person_id=person_props["id"],
-                #     )
-                #     logger.info(f"Linked Person {person_props['name']} to Publication {pub['category']}")
+                for pub in person.get("list_publications", []):
+                    await session.run(
+                        """
+                        MATCH (pub:Publication {field: $pub_category}), (p:Person {id: $person_id})
+                        MERGE (p)-[:PUBLISHED]->(pub)
+                        """,
+                        pub_category=pub["category"],
+                        person_id=person_props["id"],
+                    )
+                    logger.info(f"Linked Person {person_props['name']} to Publication {pub['category']}")
 
                 # Connect existing Positions to Work Experience
                 for work in person.get("work_experience", []):
