@@ -21,7 +21,7 @@ q = Color.RESET
 async def connect_to_neo4j(uri, database, user, password):
     return AsyncGraphDatabase.driver(uri, database=database, auth=(user, password))
 
-async def create_query(data):
+async def fixed_filter(data):
     roles = data.get("roles", [])
     skills = data.get("skills", [])
     certifications = data.get("certifications", [])
@@ -59,7 +59,7 @@ async def find_person_nodes():
     
     async with driver.session(database=NEO4J_DATABASE) as session:
         data = {"roles": ["IT Support"], "skills": ["Java", "Networking"], "certifications": ["Information Technology"], "degrees": ["Bachelor Degree"]}
-        query = await create_query(data)
+        query = await fixed_filter(data)
         logger.info(f"{g}Running query:{q}\n{query}")
         result = await session.run(query, roles=data.get("roles", []), skills=data.get("skills", []), certifications=data.get("certifications", []), degrees=data.get("degrees", []))
 
