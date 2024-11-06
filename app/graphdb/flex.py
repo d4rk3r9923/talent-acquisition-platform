@@ -52,7 +52,7 @@ async def create_flex_nodes(driver, person_data):
                     props=person_props,
                 )
                 logger.info(
-                    f"{g} Created/merged Person node: {q} {person_props['name']} {g} with ID {q} {person_props['id']}"
+                    f"{g}Created/merged Person node: {q}{person_props['name']} {g}with ID {q}{person_props['id']}"
                 )
 
                 # Connect existing Skills to Person node
@@ -65,8 +65,8 @@ async def create_flex_nodes(driver, person_data):
                         skill_name=skill["name"],
                         person_id=person_props["id"],
                     )
-                    logger.info(f"Linked Person {person_props['name']} to Skill {skill['name']}")
-                
+                    logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Skill {q}{skill['name']}")
+
                 # Connect existing Certifications to Person node
                 for cert in person.get("list_certification", []):
                     await session.run(
@@ -77,8 +77,8 @@ async def create_flex_nodes(driver, person_data):
                         cert_category=cert["category"],
                         person_id=person_props["id"],
                     )
-                    logger.info(f"Linked Person {person_props['name']} to Certification {cert['category']}")
-                
+                    logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Certification {q}{cert['category']}")
+
                 # Connect existing Publications to Person node
                 for pub in person.get("list_publications", []):
                     await session.run(
@@ -89,7 +89,7 @@ async def create_flex_nodes(driver, person_data):
                         pub_category=pub["category"],
                         person_id=person_props["id"],
                     )
-                    logger.info(f"Linked Person {person_props['name']} to Publication {pub['category']}")
+                    logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Publication {q}{pub['category']}")
 
                 # Connect existing Positions to Work Experience
                 for work in person.get("work_experience", []):
@@ -106,7 +106,7 @@ async def create_flex_nodes(driver, person_data):
                         "responsibilities": work.get("responsibilities", []),
                         "achievements": work.get("achievements", []),
                     }
-                    
+
                     await session.run(
                         """
                         MERGE (w:Workplace {id: $workplace_id})
@@ -115,7 +115,7 @@ async def create_flex_nodes(driver, person_data):
                         workplace_id=workplace_id,
                         workplace_props=workplace_props,
                     )
-                    logger.info(f"Created/merged Workplace node: {workplace_props['name']}")
+                    logger.info(f"{g}Created/merged Workplace node: {q}{workplace_props['name']}")
                     await session.run(
                         """
                         MATCH (w:Workplace {id: $workplace_id}), (p:Person {id: $person_id})
@@ -130,8 +130,8 @@ async def create_flex_nodes(driver, person_data):
                         person_id=person_props["id"],
                         relationship_props=relationship_props,
                     )
-                    logger.info(f"Linked Person {person_props['name']} to Workplace {workplace_props['name']}")
-                
+                    logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Workplace {q}{workplace_props['name']}")
+
                 # Create or merge Education nodes and link with Person
                 for edu in person.get("education", []):
                     education_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, edu["name_education"]))
@@ -140,7 +140,7 @@ async def create_flex_nodes(driver, person_data):
                         "name": edu["name_education"],
                         "degree": edu["degree"]
                     }
-                    
+
                     await session.run(
                         """
                         MERGE (e:Education {id: $education_id})
@@ -149,7 +149,7 @@ async def create_flex_nodes(driver, person_data):
                         education_id=education_id,
                         education_props=education_props,
                     )
-                    logger.info(f"Created/merged Education node: {education_props['name']}")
+                    logger.info(f"{g}Created/merged Education node: {q}{education_props['name']}")
                     await session.run(
                         """
                         MATCH (e:Education {id: $education_id}), (p:Person {id: $person_id})
@@ -158,34 +158,8 @@ async def create_flex_nodes(driver, person_data):
                         education_id=education_id,
                         person_id=person_props["id"],
                     )
-                    logger.info(f"Linked Person {person_props['name']} to Education {education_props['name']} with STUDIED_AT relationship")
-                
-                # Connect existing Positions to Person
-                for position in person.get("positions", []):
-                    position_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, position["role"]))  # Unique UUID for each position based on role name
-                    position_props = {
-                        "id": position_id,
-                        "name": position["role"]
-                    }
-                    relationship_props = {
-                        "duration": position.get("duration"),
-                        "responsibilities": position.get("responsibilities", []),
-                        "achievements": position.get("achievements", [])
-                    }
-                    await session.run(
-                        """
-                        MATCH (pos:Position {id: $position_id}), (p:Person {id: $person_id})
-                        MERGE (p)-[r:WORKED_AS]->(pos)
-                        SET r.duration = $relationship_props.duration,
-                            r.responsibilities = $relationship_props.responsibilities,
-                            r.achievements = $relationship_props.achievements
-                        """,
-                        position_id=position_id,
-                        person_id=person_props["id"],
-                        relationship_props=relationship_props,
-                    )
-                    logger.info(f"Linked Person {person_props['name']} to Position {position_props['name']} with WORKED_AS relationship")
-                
+                    logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Education {q}{education_props['name']} with STUDIED_AT relationship")
+
                 # Connect Projects to Person
                 for project in person.get("list_project", []):
                     project_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, project["name"]))  # Unique UUID for each project based on name
@@ -203,7 +177,7 @@ async def create_flex_nodes(driver, person_data):
                         project_id=project_id,
                         project_props=project_props,
                     )
-                    logger.info(f"Created/merged Project node: {project_props['name']}")
+                    logger.info(f"{g}Created/merged Project node: {q}{project_props['name']}")
                     await session.run(
                         """
                         MATCH (proj:Project {id: $project_id}), (p:Person {id: $person_id})
@@ -212,10 +186,10 @@ async def create_flex_nodes(driver, person_data):
                         project_id=project_id,
                         person_id=person_props["id"],
                     )
-                    logger.info(f"Linked Person {person_props['name']} to Project {project_props['name']} with DID relationship")
+                    logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Project {q}{project_props['name']} with DID relationship")
 
             except Exception as e:
-                logger.error(f"Error adding Person node or relationships for {person_props['name']}: {e}")
+                logger.error(f"{r}Error adding Person node or relationships for {q}{person_props['name']}: {e}")
 
 
 async def create_constraints(driver):
@@ -251,49 +225,33 @@ async def create_constraints(driver):
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:WORKED_AT]-() REQUIRE r.role IS NOT NULL
                 """
             )
-            # await session.run(
-            #     """
-            #     CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:WORKED_AT]-() REQUIRE r.start_date IS NOT NULL
-            #     """
-            # )
             await session.run(
                 """
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:WORKED_AT]-() REQUIRE r.responsibilities IS NOT NULL
                 """
-            )                            
-            logger.info(f"Constraint created for WORKED_AT relationships")
+            )
+            logger.info(f"{g}Constraint created for WORKED_AT relationships")
             await session.run(
                 """
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:WORKED_AS]-() REQUIRE r.responsibilities IS NOT NULL
                 """
             )
-            logger.info(f"Constraint created for WORKED_AS relationships")
+            logger.info(f"{g}Constraint created for WORKED_AS relationships")
             await session.run(
                 """
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:STUDIED_AT]-() REQUIRE r.degree IS UNIQUE
                 """
             )
-            # await session.run(
-            #     """
-            #     CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:STUDIED_AT]-() REQUIRE r.start_year IS NOT NULL
-            #     """
-            # )
-            # logger.info(f"Constraint created for STUDIED_AT relationships")
+            logger.info(f"{g}Constraint created for STUDIED_AT relationships")
             await session.run(
                 """
                 CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:EARNED]-() REQUIRE r.name IS UNIQUE
                 """
             )
-            logger.info(f"Constraint created for EARNED relationships")
-            # await session.run(
-            #     """
-            #     CREATE CONSTRAINT IF NOT EXISTS FOR ()-[r:PUBLISHED]-() REQUIRE r.conference_name IS UNIQUE
-            #     """
-            # )
-            # logger.info(f"Constraint created for PUBLISHED relationships")
+            logger.info(f"{g}Constraint created for EARNED relationships")
 
         except Exception as e:
-            logger.error(f"Error creating constraints: {e}")
+            logger.error(f"{r}Error creating constraints: {e}")
 
 
 async def main():
@@ -302,15 +260,15 @@ async def main():
 
     try:
         driver = await connect_to_neo4j(NEO4J_URI, NEO4J_DATABASE, NEO4J_USERNAME, NEO4J_PASSWORD)
-        logger.info("Connected to Neo4j database")
+        logger.info(f"{g}Connected to Neo4j")
         await create_constraints(driver)
         await create_flex_nodes(driver, candidate_data)
-        logger.info("Successfully added person nodes and relationships")
+        logger.info(f"{g}Successfully added person nodes and relationships")
     except Exception as e:
-        logger.error(f"{r} Error in main process: {q} {e}")
+        logger.error(f"{r}Error in main process: {q}{e}")
     finally:
         await driver.close()
-        logger.info("Closed the Neo4j driver")
+        logger.info(f"{g}Disconnected from Neo4j")
 
 
 if __name__ == "__main__":
