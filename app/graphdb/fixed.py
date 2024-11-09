@@ -7,6 +7,7 @@ from loguru import logger
 from neo4j import AsyncGraphDatabase
 
 from app.preprocessing.fixed_schema import (
+    list_degrees,
     list_certifications,
     list_positions,
     list_publications,
@@ -35,6 +36,10 @@ def generate_uuid(value):
 
 
 def prepare_nodes():
+    degree_nodes = [
+        {"id": generate_uuid(degree.category), "name": degree.category}
+        for degree in list_degrees
+    ]
     position_nodes = [
         {"id": generate_uuid(pos.name), "name": pos.name}
         for pos in list_positions
@@ -55,12 +60,13 @@ def prepare_nodes():
         for pub in list_publications
     ]
 
-    return position_nodes, skill_nodes, certification_nodes, publication_nodes
+    return degree_nodes, position_nodes, skill_nodes, certification_nodes, publication_nodes
 
 
 async def create_constraints(session):
     try:
         constraints = [
+            "CREATE CONSTRAINT IF NOT EXISTS FOR (n:Degree) REQUIRE n.id IS UNIQUE",
             "CREATE CONSTRAINT IF NOT EXISTS FOR (n:Position) REQUIRE n.id IS UNIQUE",
             "CREATE CONSTRAINT IF NOT EXISTS FOR (n:Skill) REQUIRE n.id IS UNIQUE",
             "CREATE CONSTRAINT IF NOT EXISTS FOR (n:Certification) REQUIRE n.id IS UNIQUE",
@@ -95,7 +101,7 @@ async def main():
         async with driver.session() as session:
             await create_constraints(session)
             nodes = prepare_nodes()
-            node_types = ["Position", "Skill", "Certification", "Publication"]
+            node_types = ["Degree", "Position", "Skill", "Certification", "Publication"]
 
             for node_list, node_type in zip(nodes, node_types):
                 await add_nodes_to_db(session, node_list, node_type)

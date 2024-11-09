@@ -106,8 +106,8 @@ if __name__ == "__main__":
     from app.references.client import chatOpenai_client
 
     langfuse_handler = CallbackHandler(
-        secret_key="sk-lf-2775ace0-28e2-433a-b56c-650977ae6d11",
-        public_key="pk-lf-a950fa09-aac1-49b0-a678-b0338878c047",
+        secret_key="sk-lf-b5c239d4-e170-4f04-a552-2c3501152392",
+        public_key="pk-lf-56088f31-d413-4305-a8df-98dcdc214c77",
         host="https://us.cloud.langfuse.com"
     )
 

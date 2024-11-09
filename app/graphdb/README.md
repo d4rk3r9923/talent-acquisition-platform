@@ -1,5 +1,4 @@
 # Query
 1. [x] Default Filter
-2. [ ] Embedding Comparison
-3. [ ] Partial Filter
-4. [ ] Named-entity Recognition
+2. [x] Embedding Comparison
+3. [x] Partial Filter

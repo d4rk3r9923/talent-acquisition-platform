@@ -48,16 +48,17 @@ class QueryAnalysis(Runnable):
         for key, values in entity_dict.items():
             if values is None:
                 # If values is None, set the result for this key to None
-                transformed_dict[key] = None
-            elif len(values) == 1:
-                # If there's only one item, use its value directly
-                transformed_dict[key] = values[0].value
+                transformed_dict[key] = []
+            # elif len(values) == 1:
+            #     # If there's only one item, use its value directly
+            #     transformed_dict[key] = values[0].value
             else:
                 # If there are multiple items, create a list of their values
                 transformed_dict[key] = [value.value for value in values]
         
         return transformed_dict
 
+    # TODOS: Async llm invoke
     def invoke(self, state: AgentState) -> dict:
         extract_prompt, extract_fixed_prompt = self._generate_prompt(state)
         llm = self.llm.with_structured_output(schema=TypedDict, method="json_mode")
@@ -89,16 +90,16 @@ class QueryAnalysis(Runnable):
             "skill": dict_fixed_entity["skill"],
             "certification": dict_fixed_entity["certification"],
             "education_degree": dict_fixed_entity["education_degree"],
-            "age": entity.get("age"),
-            "years_of_experience": entity.get("years_of_experience"),
-            "education_name": entity.get("education_name"),
-            "workplace_name": entity.get("workplace_name"),
-            "summary": entity.get("summary"),
-            "location": entity.get("location"),
-            "specialization": entity.get("specialization"),
-            "industry": entity.get("industry"),
-            "leadership_experience": entity.get("leadership_experience"),
-            "project": entity.get("project"),
-            "team_experience": entity.get("team_experience"),
-            "other": entity.get("other")
+            "age": entity.get("age", ""),
+            "years_of_experience": entity.get("years_of_experience", ""),
+            "education_name": entity.get("education_name", ""),
+            "workplace_name": entity.get("workplace_name", ""),
+            "summary": entity.get("summary", ""),
+            "location": entity.get("location", ""),
+            "specialization": entity.get("specialization", ""),
+            "industry": entity.get("industry", ""),
+            "leadership_experience": entity.get("leadership_experience", ""),
+            "project": entity.get("project", ""),
+            "team_experience": entity.get("team_experience", ""),
+            "other": entity.get("other", "")
         }

@@ -132,13 +132,19 @@ async def create_flex_nodes(driver, person_data):
                     )
                     logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Workplace {q}{workplace_props['name']}")
 
-                # Create or merge Education nodes and link with Person
+                # Connect Education to Person
                 for edu in person.get("education", []):
                     education_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, edu["name_education"]))
+                    degree_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, edu["degree"]))
+
                     education_props = {
                         "id": education_id,
-                        "name": edu["name_education"],
-                        "degree": edu["degree"]
+                        "name": edu["name_education"]
+                    }
+
+                    degree_props = {
+                        "id": degree_id,
+                        "name": edu["degree"],
                     }
 
                     await session.run(
@@ -150,6 +156,17 @@ async def create_flex_nodes(driver, person_data):
                         education_props=education_props,
                     )
                     logger.info(f"{g}Created/merged Education node: {q}{education_props['name']}")
+
+                    await session.run(
+                        """
+                        MERGE (d:Degree {id: $degree_id})
+                        SET d += $degree_props
+                        """,
+                        degree_id=degree_id,
+                        degree_props=degree_props,
+                    )
+                    logger.info(f"{g}Created/merged Degree node: {q}{degree_props['name']}")
+                    
                     await session.run(
                         """
                         MATCH (e:Education {id: $education_id}), (p:Person {id: $person_id})
@@ -159,6 +176,26 @@ async def create_flex_nodes(driver, person_data):
                         person_id=person_props["id"],
                     )
                     logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Education {q}{education_props['name']} with STUDIED_AT relationship")
+
+                    await session.run(
+                        """
+                        MATCH (d:Degree {id: $degree_id}), (e:Education {id: $education_id})
+                        MERGE (d)-[:BELONGS_TO]->(e)
+                        """,
+                        education_id=education_id,
+                        degree_id=degree_id,
+                    )
+                    logger.info(f"{g}Linked Degree {q}{degree_props['name']} {g}to Education {q}{education_props['name']} with BELONGS_TO relationship")
+
+                    await session.run(
+                        """
+                        MATCH (p:Person {id: $person_id}), (d:Degree {id: $degree_id})
+                        MERGE (p)-[:HOLDS]->(d)
+                        """,
+                        person_id=person_props["id"],
+                        degree_id=degree_id,
+                    )
+                    logger.info(f"{g}Linked Person {q}{person_props['name']} {g}to Degree {q}{degree_props['name']} with HOLDS relationship")
 
                 # Connect Positions to Person
                 for position in person.get("positions", []):

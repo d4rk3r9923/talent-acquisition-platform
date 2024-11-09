@@ -16,7 +16,7 @@ entity_types = {
     #partial filter
     "education_name": "Educational Name, e.g., 'FPT University'",
     "workplace_name": "Work Place Name, e.g., 'Bosch",
- 
+
     #embedding
     "summary": "Summarize user query as the individual’s background by highlighting their education, work experience, industry focus, and specialized expertise (only 1 sentences and do not mention any number)",
     "location": "Following format: City, Country (e.g., Hanoi, Vietnam or San Francisco, USA)",
