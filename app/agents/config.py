@@ -2,6 +2,9 @@ import json
 from dataclasses import dataclass
 from typing import Any, List, TypedDict, Optional
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
 # fixed (filter)
 # "role": "Job title or role",
 # "skill": "Specific skills",
@@ -31,6 +34,10 @@ entity_types = {
 }
 
 class AgentState(TypedDict):
+    uri: str
+    database: str
+    username: str
+    password: str
     user_question: str
     entity_types: str
     role: List[str]
@@ -41,8 +48,8 @@ class AgentState(TypedDict):
     years_of_experience: Optional[str]
     education_name: Optional[str]
     workplace_name: Optional[str]
-    summary: Optional[str]
-    location: Optional[str]
+    summary: Optional[List[float]] # Summary Embedding
+    location: Optional[List[float]] # Location Embedding
     specialization: Optional[str]
     industry: Optional[str]
     leadership_experience: Optional[str]
@@ -54,6 +61,10 @@ class AgentState(TypedDict):
 
 @dataclass
 class AgentDefaultStates:
+    uri = os.getenv("NEO4J_URI")
+    database = os.getenv("NEO4J_DATABASE")
+    username = os.getenv("NEO4J_USERNAME")
+    password = os.getenv("NEO4J_PASSWORD")
     graph_saved_path: str = "images/MainGraph.png"
     code_execution_result_path: str = "local_files/"
     entity_types: str = json.dumps(entity_types, indent=2)
