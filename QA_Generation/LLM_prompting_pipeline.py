@@ -2,83 +2,77 @@ import operator
 from typing_extensions import TypedDict
 from langgraph.constants import Send
 from langgraph.graph import StateGraph, START, END
-from langchain_together import ChatTogether
+from langchain_openai import ChatOpenAI
 from typing import Annotated, TypedDict, List
-from template_utils import categories_template, map_categories_template, get_schema, generate_QA_template
-from langchain_openai import AzureChatOpenAI
-from parse_utils import Categories, Pairs
+from template_utils import categories_template, generate_Q_template, generate_A_template
+from parse_utils import Categories, Questions, Answers
 import jsonlines
 import os
 import asyncio
-import time
+from langfuse.callback import CallbackHandler
+from dotenv import load_dotenv
+load_dotenv()
 
-os.environ["TOGETHER_API_KEY"] = "80f6eb25e6e817651c95012f6f92a9a4cfc33a7352e996ee46ca65fa4d7ce051"
+
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+langfuse_handler = CallbackHandler(
+    secret_key=os.getenv("SECRET_KEY"),
+    public_key=os.getenv("PUBLIC_KEY"),
+    host="https://us.cloud.langfuse.com"
+)
 
 class State(TypedDict):
-    schema: str
     categories: Annotated[List, operator.add]
     category: str
-    final_categories: List
-    QA_pairs: Annotated[List, operator.add]
-    times: int
+    pairs: Annotated[List, operator.add]
     n_category: int
     n_pair: int
 
 
 async def generate_category(state: State):
-    response = await inital_chain.ainvoke({"schema": state["schema"], "n_category": state["n_category"]})
+    response = await inital_chain.ainvoke({"n_category": state["n_category"]})
+
     return {"categories": response["categories"]}
-
-
-def map_categories(state: State):
-    return [
-        Send("generate_category", {"schema": state["schema"], "n_category": state["n_category"]}) for _ in range(state["times"])
-    ]
-
-
-async def final_category(state: State):
-    response = await map_chain.ainvoke({"categories": state["categories"], "n_category": state["n_category"] * 2})
-    return {"final_categories": response["categories"]}
-
 
 def map_generate_QA(state: State):
     return [
         Send("generate_QA", {"category": category, 
-                             "n_pair": state["n_pair"], 
-                             "schema": state["schema"]}) for category in state["final_categories"]
+                             "n_pair": state["n_pair"]}) for category in state["categories"]
     ]
 
 
 async def generate_QA(state: State):
-    response = await generate_QA_chain.ainvoke({"category": state["category"], 
-                                                "n_pair": state["n_pair"], 
-                                                "schema": state["schema"]})
-    return {"QA_pairs": response["question_cypher_pairs"]}
+    answers = await generate_A_chain.ainvoke({"n_pair": state["n_pair"], "category": state["category"]})
+    answers = answers["answers"]
+
+    questions = await generate_Q_chain.ainvoke({"answers": answers})
+    questions = questions["questions"]
+    
+
+    return {"pairs": [{"question": questions[i]["question"], 
+                       "answer": answers[i]} for i in range(min(len(questions), len(answers)))]}
 
 
 def model():
     graph_builder = StateGraph(State)
     graph_builder.add_node("generate_category", generate_category)
-    graph_builder.add_node("final_category", final_category)
     graph_builder.add_node("generate_QA", generate_QA)
-    graph_builder.add_conditional_edges(START, map_categories, ["generate_category"])
-    graph_builder.add_edge("generate_category", "final_category")
-    graph_builder.add_conditional_edges("final_category", map_generate_QA, ["generate_QA"])
+    graph_builder.add_edge(START, "generate_category")
+    graph_builder.add_conditional_edges("generate_category", map_generate_QA, ["generate_QA"])
     graph_builder.add_edge("generate_QA", END)
     graph = graph_builder.compile()
     return graph
 
 
 async def inference(model):
-    async for event in model.astream({"schema": get_schema(), "times": 5, "n_pair": 40, "n_category":12}):
-        await asyncio.sleep(3)
-        time.sleep(3)
+    config={"callbacks": [langfuse_handler]}
+    async for event in model.astream({"n_pair": 10, "n_category":50}, config=config):
         print(event.keys())
-        if event.get("final_category"):
-            save_results("categories", event["final_category"]["final_categories"])
+        if event.get("generate_category"):
+            save_results("categories", event["generate_category"]["categories"])
 
         if event.get("generate_QA"):
-            save_results("results", event["generate_QA"]["QA_pairs"])
+            save_results("results", event["generate_QA"]["pairs"])
 
 
 def save_results(name, data):
@@ -95,18 +89,18 @@ if __name__=="__main__":
     if not os.path.exists("results"):
         os.makedirs("results")
 
-    llm = ChatTogether(
-        model="meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
         temperature=0.0,
         max_tokens=None,
         timeout=None,
-        max_retries=5,
-        # other params...
-    )
+        max_retries=3,
+        )
 
     inital_chain = categories_template() | llm.with_structured_output(Categories)
-    map_chain = map_categories_template() | llm.with_structured_output(Categories)
-    generate_QA_chain = generate_QA_template() | llm.with_structured_output(Pairs)
+    generate_Q_chain = generate_Q_template() | llm.with_structured_output(Questions)
+    generate_A_chain = generate_A_template() | llm.with_structured_output(Answers)
+
 
     model_graph = model()
     save_image(model_graph)

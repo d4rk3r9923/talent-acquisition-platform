@@ -1,12 +1,53 @@
-{"category": "Person Profile", "description": "Questions about a person"}
-{"category": "Education and Work Experience", "description": "Questions about education and work experience"}
-{"category": "Skills and Certifications", "description": "Questions about skills and certifications"}
-{"category": "Publications and Achievements", "description": "Questions about publications and achievements"}
-{"category": "Workplace and Position", "description": "Questions about workplace and position"}
-{"category": "Relationships and Networks", "description": "Questions about relationships between people"}
-{"category": "Path Analysis", "description": "Questions about paths between nodes"}
-{"category": "Node Similarity", "description": "Questions about similarity between nodes"}
-{"category": "Graph Structure", "description": "Questions about the overall structure of the graph"}
-{"category": "Centrality and Influence", "description": "Questions about centrality and influence of nodes"}
-{"category": "Community Detection", "description": "Questions about communities within the graph"}
-{"category": "Anomaly Detection", "description": "Questions about anomalies within the graph"}
+{"category": "Artificial Intelligence"}
+{"category": "Blockchain Technology"}
+{"category": "Cybersecurity"}
+{"category": "Data Science"}
+{"category": "Cloud Computing"}
+{"category": "Internet of Things (IoT)"}
+{"category": "Augmented Reality (AR)"}
+{"category": "Virtual Reality (VR)"}
+{"category": "Machine Learning"}
+{"category": "Natural Language Processing (NLP)"}
+{"category": "Robotics"}
+{"category": "Biotechnology"}
+{"category": "Fintech"}
+{"category": "E-commerce"}
+{"category": "Digital Marketing"}
+{"category": "Social Media Management"}
+{"category": "Mobile App Development"}
+{"category": "Web Development"}
+{"category": "Game Development"}
+{"category": "DevOps"}
+{"category": "Software Engineering"}
+{"category": "Quantum Computing"}
+{"category": "3D Printing"}
+{"category": "Wearable Technology"}
+{"category": "Smart Home Technology"}
+{"category": "Telemedicine"}
+{"category": "Renewable Energy"}
+{"category": "Sustainable Development"}
+{"category": "Agritech"}
+{"category": "EdTech"}
+{"category": "HealthTech"}
+{"category": "Travel Technology"}
+{"category": "Real Estate Technology"}
+{"category": "Supply Chain Management"}
+{"category": "Logistics Technology"}
+{"category": "Human Resources Technology"}
+{"category": "Customer Relationship Management (CRM)"}
+{"category": "Content Management Systems (CMS)"}
+{"category": "Video Streaming Technology"}
+{"category": "Podcasting"}
+{"category": "Online Learning Platforms"}
+{"category": "Digital Payment Solutions"}
+{"category": "Affiliate Marketing"}
+{"category": "Influencer Marketing"}
+{"category": "Search Engine Optimization (SEO)"}
+{"category": "Email Marketing"}
+{"category": "Data Analytics"}
+{"category": "Business Intelligence (BI)"}
+{"category": "Augmented Analytics"}
+{"category": "Edge Computing"}
+{"category": "Smart Cities"}
+{"category": "Digital Twins"}
+{"category": "Chatbots and Virtual Assistants"}
