@@ -4,7 +4,7 @@ import os
 
 from dotenv import load_dotenv
 from loguru import logger
-from neo4j import AsyncGraphDatabase
+from neo4j import GraphDatabase
 
 from app.references.util import Color
 
@@ -19,10 +19,10 @@ g = Color.GREEN
 r = Color.RED
 q = Color.RESET
 
-async def connect_to_neo4j(uri, database, user, password):
-    return AsyncGraphDatabase.driver(uri, database=database, auth=(user, password))
+def connect_to_neo4j(uri, database, user, password):
+    return GraphDatabase.driver(uri, database=database, auth=(user, password))
 
-async def fixed_filter(data):
+def filter(data):
     roles = data.get("roles", [])
     skills = data.get("skills", [])
     certifications = data.get("certifications", [])
@@ -53,21 +53,19 @@ async def fixed_filter(data):
             query += f"MATCH (p)-[:HOLDS]->(:Degree {{name: '{degree}'}})\n"
 
     # Filters
-    if age:
+    if age:        
         query += (
             "WHERE p.dob IS NOT NULL AND p.dob <> '' "
             "AND date(p.dob) IS NOT NULL "
-            "AND date().year - date(p.dob).year "
+            f"AND ({age.strip().replace("age", "(date().year - date(p.dob).year)")})\n"
         )
-        query += f"{age.strip()}\n"
 
     if yoe:
         query += (
             "MATCH (p)-[r:WORKED_AS]->()\n"
             "WITH p, sum(r.duration) AS total_yoe\n"
-            "WHERE total_yoe "
+            f"WHERE total_yoe {yoe.strip()}\n"
         )
-        query += f"{yoe.strip()}\n"
     
     # Embedding comparison using cosine similarity
     if summary:
@@ -101,13 +99,20 @@ async def fixed_filter(data):
         first_keyword_match = f"edu.name CONTAINS '{edu_keyword[0]}'"
         remaining_keywords_match = " OR ".join([f"edu.name CONTAINS '{kw}'" for kw in edu_keyword[1:]])
 
-        query += (
-            f"MATCH (p)-[:STUDIED_AT]->(edu:Education) WHERE {edu_full_phrase_match} OR ({first_keyword_match}) OR ({remaining_keywords_match})\n"
-            f"WITH p, edu, size([keyword IN {edu_keyword} WHERE edu.name CONTAINS keyword]) AS edu_match_count,\n"
-            f"     size([keyword IN {edu_keyword} WHERE edu.name CONTAINS '{edu_keyword[0]}']) AS first_keyword_count\n"
-        )
-
-        query += "ORDER BY first_keyword_count DESC, edu_match_count DESC\n"
+        if remaining_keywords_match:
+            query += (
+                f"MATCH (p)-[:STUDIED_AT]->(edu:Education) WHERE {edu_full_phrase_match} OR ({first_keyword_match}) OR ({remaining_keywords_match})\n"
+                f"WITH p, edu, size([keyword IN {edu_keyword} WHERE edu.name CONTAINS keyword]) AS edu_match_count,\n"
+                f"     size([keyword IN {edu_keyword} WHERE edu.name CONTAINS '{edu_keyword[0]}']) AS first_keyword_count\n"
+                f"ORDER BY first_keyword_count DESC, edu_match_count DESC\n"
+            )
+        else:
+            query += (
+                f"MATCH (p)-[:STUDIED_AT]->(edu:Education) WHERE {edu_full_phrase_match} OR ({first_keyword_match})\n"
+                f"WITH p, edu, size([keyword IN {edu_keyword} WHERE edu.name CONTAINS keyword]) AS edu_match_count,\n"
+                f"     size([keyword IN {edu_keyword} WHERE edu.name CONTAINS '{edu_keyword[0]}']) AS first_keyword_count\n"
+                f"ORDER BY first_keyword_count DESC, edu_match_count DESC\n"
+            )
 
     if workplace:
         work_keyword = workplace.split()
@@ -115,13 +120,20 @@ async def fixed_filter(data):
         first_keyword_match = f"work.name CONTAINS '{work_keyword[0]}'"
         remaining_keywords_match = " OR ".join([f"work.name CONTAINS '{kw}'" for kw in work_keyword[1:]])
 
-        query += (
-            f"MATCH (p)-[:WORKED_AT]->(work:Workplace) WHERE {work_full_phrase_match} OR ({first_keyword_match}) OR ({remaining_keywords_match})\n"
-            f"WITH p, work, size([keyword IN {work_keyword} WHERE work.name CONTAINS keyword]) AS work_match_count,\n"
-            f"     size([keyword IN {work_keyword} WHERE work.name CONTAINS '{work_keyword[0]}']) AS first_keyword_count\n"
-        )
-
-        query += "ORDER BY first_keyword_count DESC, work_match_count DESC\n"
+        if remaining_keywords_match:
+            query += (
+                f"MATCH (p)-[:WORKED_AT]->(work:Workplace) WHERE {work_full_phrase_match} OR ({first_keyword_match}) OR ({remaining_keywords_match})\n"
+                f"WITH p, work, size([keyword IN {work_keyword} WHERE work.name CONTAINS keyword]) AS work_match_count,\n"
+                f"     size([keyword IN {work_keyword} WHERE work.name CONTAINS '{work_keyword[0]}']) AS first_keyword_count\n"
+                f"ORDER BY first_keyword_count DESC, work_match_count DESC\n"
+            )
+        else:
+            query += (
+                f"MATCH (p)-[:WORKED_AT]->(work:Workplace) WHERE {work_full_phrase_match} OR ({first_keyword_match})\n"
+                f"WITH p, work, size([keyword IN {work_keyword} WHERE work.name CONTAINS keyword]) AS work_match_count,\n"
+                f"     size([keyword IN {work_keyword} WHERE work.name CONTAINS '{work_keyword[0]}']) AS first_keyword_count\n"
+                f"ORDER BY first_keyword_count DESC, work_match_count DESC\n"
+            )
 
     query += "RETURN DISTINCT(p) LIMIT 10"
     
@@ -132,33 +144,73 @@ async def fixed_filter(data):
     logger.info(f"{g}Generated query:{q}\n{query}")
     return query
 
-async def find_person_nodes():
-    driver = await connect_to_neo4j(NEO4J_URI, NEO4J_DATABASE, NEO4J_USERNAME, NEO4J_PASSWORD)
-    logger.info(f"{g}Connected to Neo4j{q}")
-    
-    async with driver.session(database=NEO4J_DATABASE) as session:
-        data = {
-            # "roles": ["IT Support"],
-            # "skills": ["Java", "Networking"],
-            # "certifications": ["Information Technology"],
-            # "degrees": ["Bachelor Degree"],
-            "age": "< 100",
-            "yoe": ">= 0",
-            # "summary": [],
-            # "location": [],
-            # "education_name": "FPT University",
-            # "workplace_name": "FPT Software"
-            }
-        # TODOS: score ranking based on filters
-        query = await fixed_filter(data)
-        logger.info(f"{g}Running the query")
-        result = await session.run(query)
+def weighted_rrf_scoring(fixed_result, embedding_result, partial_result, weights, k=60):
+    person_scores = {}
 
-        async for record in result:
-            logger.info(f"{g}Found person node:{q} {record['p'].get('name')}")
+    def process_result(result, weight, query_name):
+        for idx, record in enumerate(result):
+            person_id = record['p'].get('id')
+            score = (1 / (idx + k)) * weight  # Use k for smoothing
+            if person_id in person_scores:
+                person_scores[person_id] += score
+            else:
+                person_scores[person_id] = score
+            logger.info(f"Query: {query_name}, Person ID: {person_id}, Rank: {idx + 1}, Score: {score}")
     
-    await driver.close()
-    logger.info(f"{g}Disconnected from Neo4j{q}")
+    process_result(fixed_result, weights["fixed"], "Fixed")
+    process_result(embedding_result, weights["embedding"], "Embedding")
+    process_result(partial_result, weights["partial"], "Partial")
+
+    return sorted(person_scores.items(), key=lambda x: x[1], reverse=True)
+
+def find_person_nodes():
+    driver = connect_to_neo4j(NEO4J_URI, NEO4J_DATABASE, NEO4J_USERNAME, NEO4J_PASSWORD)
+    
+    with driver.session(database=NEO4J_DATABASE) as session:
+        data_fixed = {
+            "roles": ["IT Support"],
+            "skills": ["Java"],
+            "certifications": ["Information Technology"],
+            "degrees": ["Bachelor Degree"],
+            "age": "",
+            "yoe": ""
+        }
+
+        data_embedding = {
+            "summary": [],
+            "location": []
+        }
+
+        data_partial = {
+            "education_name": "University of Technology",
+            "workplace_name": "Hanoi Club"
+        }
+
+        weights = {"fixed": 1, "embedding": 0.5, "partial": 0.25}
+
+        fixed_query = filter(data_fixed)
+        fixed_result = session.run(fixed_query)
+        # for fixed_record in fixed_result:
+        #     logger.info(f"{g}Found person node:{q} {fixed_record['p'].get('id')}")
+
+        embedding_query = filter(data_embedding)
+        embedding_result = session.run(embedding_query)
+        # for embedding_record in embedding_result:
+        #     logger.info(f"{g}Found person node:{q} {embedding_record['p'].get('id')}")
+
+        partial_query = filter(data_partial)
+        partial_result = session.run(partial_query)
+        # for partial_record in partial_result:
+        #     logger.info(f"{g}Found person node:{q} {partial_record['p'].get('id')}")
+
+        data = {**data_fixed, **data_embedding, **data_partial}
+        data_query = filter(data)
+        ranked_results = weighted_rrf_scoring(fixed_result, embedding_result, partial_result, weights)
+        # data_result = session.run(data_query)
+        for person_id, score in ranked_results:
+            logger.info(f"{g}Person ID:{q} {person_id}{g}, Score:{q} {score}")
+
+    driver.close()
 
 if __name__ == "__main__":
-    asyncio.run(find_person_nodes())
+    find_person_nodes()
