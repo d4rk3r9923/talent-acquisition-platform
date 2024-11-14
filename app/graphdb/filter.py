@@ -136,12 +136,7 @@ def filter(data):
             )
 
     query += "RETURN DISTINCT(p) LIMIT 10"
-    
-    with open("./app/graphdb/filter.cql", "w") as f:
-        f.write("// Generated query\n")
-        f.write(query)
 
-    logger.info(f"{g}Generated query:{q}\n{query}")
     return query
 
 def weighted_rrf_scoring(fixed_result, embedding_result, partial_result, weights, k=60):
@@ -205,6 +200,13 @@ def find_person_nodes():
 
         data = {**data_fixed, **data_embedding, **data_partial}
         data_query = filter(data)
+
+        with open("./app/graphdb/filter.cql", "w") as f:
+            f.write("// Generated query\n")
+            f.write(data_query)
+
+        logger.info(f"{g}Generated query:{q}\n{data_query}")
+
         ranked_results = weighted_rrf_scoring(fixed_result, embedding_result, partial_result, weights)
         # data_result = session.run(data_query)
         for person_id, score in ranked_results:
