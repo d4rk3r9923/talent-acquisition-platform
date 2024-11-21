@@ -57,7 +57,7 @@ def filter(data):
         query += (
             "WHERE p.dob IS NOT NULL AND p.dob <> '' "
             "AND date(p.dob) IS NOT NULL "
-            f"AND ({age.strip().replace("age", "(date().year - date(p.dob).year)")})\n"
+            f"AND ({age.strip().replace('age', '(date().year - date(p.dob).year)')})\n"
         )
 
     if yoe:
@@ -144,13 +144,13 @@ def weighted_rrf_scoring(fixed_result, embedding_result, partial_result, weights
 
     def process_result(result, weight, query_name):
         for idx, record in enumerate(result):
-            person_id = record['p'].get('id')
+            person_id = record['p']
             score = (1 / (idx + k)) * weight  # Use k for smoothing
             if person_id in person_scores:
                 person_scores[person_id] += score
             else:
                 person_scores[person_id] = score
-            logger.info(f"Query: {query_name}, Person ID: {person_id}, Rank: {idx + 1}, Score: {score}")
+            # logger.info(f"Query: {query_name}, Person ID: {person_id}, Rank: {idx + 1}, Score: {score}")
     
     process_result(fixed_result, weights["fixed"], "Fixed")
     process_result(embedding_result, weights["embedding"], "Embedding")
@@ -209,8 +209,8 @@ def find_person_nodes():
 
         ranked_results = weighted_rrf_scoring(fixed_result, embedding_result, partial_result, weights)
         # data_result = session.run(data_query)
-        for person_id, score in ranked_results:
-            logger.info(f"{g}Person ID:{q} {person_id}{g}, Score:{q} {score}")
+        for person, score in ranked_results:
+            logger.info(f"{g}Person ID:{q} {person.get('id')}{g}, Score:{q} {score}")
 
     driver.close()
 
