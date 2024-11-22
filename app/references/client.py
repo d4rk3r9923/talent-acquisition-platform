@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 from dotenv import load_dotenv 
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_ollama import ChatOllama
 from langchain_openai.chat_models import AzureChatOpenAI
 
@@ -25,4 +25,8 @@ chatOpenai_client = ChatOpenAI(
 chatOllama_llama = ChatOllama(
     model="llama3.1",
     temperature=0,
+)
+
+embedding_OpenAI = OpenAIEmbeddings(
+    model="text-embedding-3-large",
 )

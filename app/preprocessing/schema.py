@@ -28,12 +28,12 @@ class Person(BaseModel):
     summary: Optional[str] = Field(None, description="Summarize the individual’s background by highlighting their education, work experience, industry focus, and specialized expertise (around 2 sentences and do not mention any number)")
     dob: Optional[str] = Field(None, description="Date of birth (Must following format: yyyy-mm-dd)")
     location: Optional[str] = Field(None, description="Following format: City, Country (e.g., Hanoi, Vietnam or San Francisco, USA) returning in English")
-    portfolio: Optional[List[str]] = Field(None, description="URLs of personal portfolio or website (e.g., GitHub, LinkedIn, etc.)")
+    # portfolio: Optional[List[str]] = Field(None, description="URLs of personal portfolio or website (e.g., GitHub, LinkedIn, etc.)")
 
 
 # WorkExperience Model
 class WorkAt(BaseModel):
-    work_place: str = Field(..., description="Name of the workplace in english name")
+    work_place: str = Field(None, description="Name of the workplace in english name")
     role: PositionName = Field(None, description="Position name should match an entry in the list")
     start_date: Optional[str] = Field(None, description="Start date of the role (Must following format: yyyy-mm-dd)")
     end_date: Optional[str] = Field(None, description="End date of the role, if applicable (Must following format: yyyy-mm-dd)")
@@ -62,7 +62,7 @@ class Project(BaseModel):
 
 # EducationRelation Model
 class StudyAt(BaseModel):
-    name_education: Optional[str] = Field(..., description="Name of the education institution in english name")
+    name_education: Optional[str] = Field(None, description="Name of the education institution in english name")
     degree: DegreeCategory = Field(None, description="Degree attained by the person")
     # start_year: Optional[str] = Field(None, description="Start year of the education (Must following format: yyyy-mm-dd)")
     # end_year: Optional[str] = Field(None, description="End year of the education (Must following format: yyyy-mm-dd)")
@@ -76,4 +76,3 @@ class CandidateProfile(BaseModel):
     list_certification: Optional[List[Certification]]
     list_skill: Optional[List[Skill]]
     list_project: Optional[List[Project]]
-    # publications: Optional[List[Publication]] = Field(None, description="List of publications")
