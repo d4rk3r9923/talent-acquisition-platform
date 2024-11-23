@@ -1,0 +1,67 @@
+[
+    {
+        "person": {
+            "name": "Nguyen Duy Minh",
+            "summary": "Aspiring AI Engineer with solid expertise in developing, fine-tuning, and deploying AI models, including Large Language Models (LLMs). With hands-on experience in both academic and professional settings, I have successfully contributed to AI projects involving model optimization, backend development, and chatbot implementation, eager to contribute my capabilities to innovative AI-driven projects.",
+            "dob": null,
+            "location": "Vinhomes Grand Park, 9 Districts, Ho Chi Minh City, Vietnam",
+            "portfolio": null
+        },
+        "work_experience": [
+            {
+                "work_place": "Cyno Software Company",
+                "role": "AI Engineer",
+                "start_date": "2024-01-01",
+                "end_date": null,
+                "responsibilities": [
+                    "Contributed to the design LLM system and implementation of a RAG chatbot for company customer support.",
+                    "Led the development of a robust backend for POCY, an application designed to detect scam/spam activities.",
+                    "Data collection and preprocessing efforts, using advanced data crawling techniques to build datasets for predicting outcomes in Euro football matches."
+                ],
+                "achievements": null
+            },
+            {
+                "work_place": "Amazing Technology and Solution Company Limited",
+                "role": "AI Engineer",
+                "start_date": "2023-09-01",
+                "end_date": "2023-12-01",
+                "responsibilities": [
+                    "Engineered and implemented a facial tracking and tracing module, improving real-time monitoring capabilities."
+                ],
+                "achievements": null
+            }
+        ],
+        "education": null,
+        "list_certification": null,
+        "list_skill": [
+            {
+                "name": "Machine Learning"
+            },
+            {
+                "name": "Git"
+            },
+            {
+                "name": "Python"
+            },
+            {
+                "name": "Data Analysis"
+            },
+            {
+                "name": "Machine Learning"
+            },
+            {
+                "name": "Project Management Software"
+            }
+        ],
+        "list_project": [
+            {
+                "name": "Customer Care Chatbot",
+                "description": "Augmented model inputs by integrating access to external data sources, implemented vector-based storage for efficient retrieval of relevant information, improving the chatbot's contextual understanding and response accuracy."
+            },
+            {
+                "name": "POCY Project",
+                "description": "Preprocessing of SMS and call data to prepare datasets for analysis and model training."
+            }
+        ]
+    }
+]
