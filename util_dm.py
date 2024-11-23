@@ -4,6 +4,7 @@ from app.graphdb.fixed import *
 import asyncio
 from typing import List
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
@@ -15,6 +16,12 @@ NEO4J_DATABASE = os.getenv("NEO4J_DATABASE")
 g = Color.GREEN
 r = Color.RED
 q = Color.RESET
+
+def list_pdfs(directory="uploads"):
+    """List all PDF files in the specified directory."""
+    if not os.path.exists(directory):
+        os.makedirs(directory)  # Ensure the directory exists
+    return [f for f in os.listdir(directory) if f.endswith(".pdf")]
 
 
 async def extractFromPDF(pdf_paths: List[str]):
