@@ -1,4 +1,3 @@
-from fixed_schema import PositionName, DegreeCategory, SkillName, CertificationCategory, PublicationCategory
 from typing import List, Optional
 from pydantic import BaseModel, Field
 from typing_extensions import Annotated
@@ -26,10 +25,10 @@ class Questions(BaseModel):
 
 class Answer(BaseModel):
     """Resume JSON Format"""
-    role: Optional[List[PositionName]] = Field(None, description="Position name should match an entry in the list")
-    skill: Optional[List[SkillName]] = Field(None, description="Skill name should match an entry in the list")
-    certification: Optional[List[CertificationCategory]] = Field(None, description="Certifications Category should match an entry in the list")
-    education_degree: Optional[List[DegreeCategory]] = Field(None, description="Educational Degree should match an entry in the list")
+    role: Optional[List[str]] = Field(None, description="Position name should match an entry in the list")
+    skill: Optional[List[str]] = Field(None, description="Skill name should match an entry in the list")
+    certification: Optional[List[str]] = Field(None, description="Certifications Category should match an entry in the list")
+    education_degree: Optional[List[str]] = Field(None, description="Educational Degree should match an entry in the list")
     
     age: Annotated[Optional[str], Field(None, description="Candidate's age, e.g., '< 40', '>= 25', '= 20'")]
     years_of_experience: Annotated[Optional[str], Field(None, description="Total years of professional experience, e.g., '< 2', '>= 8', '= 4'")]
