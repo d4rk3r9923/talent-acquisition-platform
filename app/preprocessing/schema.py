@@ -10,13 +10,14 @@ from app.preprocessing.fixed_schema import (
     list_positions, 
     list_skills, 
     list_certifications, 
-    list_publications
+    list_publications,
 )
 
 # Creating Enums from objects using your custom utility
 # UniversityName = create_enum_from_objects(list_universites, enum_name='UniversityName')
 # CompanyName = create_enum_from_objects(list_workplaces, enum_name='CompanyName')
 PositionName = create_enum_from_objects(list_positions, enum_name='PositionName')
+Analyze_PositionName = create_enum_from_objects(list_positions[:-1], enum_name='PositionName') # Exclude Others
 DegreeCategory = create_enum_from_objects(list_degrees, enum_name='DegreeCategory')
 SkillName = create_enum_from_objects(list_skills, enum_name='SkillName')
 CertificationCategory = create_enum_from_objects(list_certifications, enum_name='CertificationCategory')

@@ -9,8 +9,9 @@ from typing import Optional, TypedDict
 from pydantic import BaseModel, Field
 
 from app.agents.config import AgentState
-from app.agents.prompts import EXTRACT_ENTITY_PROMPT, EXTRACT_FIXED_ENTITY_PROMPT
+from app.agents.prompt import EXTRACT_ENTITY_PROMPT, EXTRACT_FIXED_ENTITY_PROMPT
 from app.preprocessing.schema import (
+    Analyze_PositionName,
     PositionName, 
     DegreeCategory, 
     SkillName,
@@ -18,9 +19,34 @@ from app.preprocessing.schema import (
     PublicationCategory,
 )
 
+entity_types = {
+    # Filter
+    # "role": "Job title or role",
+    # "skill": "Specific skills",
+    # "certification": "Category of certifications",
+    # "education_degree": "Educational Degree",
+    "age": "Candidate's age in the format <number, >number, or =number, e.g., '<30', '>20' or '=25'",
+    "years_of_experience": "Total years of professional experience in the format <number, >number, or =number,, e.g., '=5', '>3'",
+
+    #Partial filter
+    "education_name": "Educational Name, e.g., 'FPT University'",
+    "workplace_name": "Work Place Name, e.g., 'Bosch",
+
+    #Embedding
+    "summary": "Summarize user query as the individual’s background by highlighting their education, work experience, industry focus, and specialized expertise (only 1 sentences and do not mention any number)",
+    "location": "Following format: City, Country (e.g., Hanoi, Vietnam or San Francisco, USA)",
+
+    #Non-fixed
+    "specialization": "Area of specialization within a field, e.g., 'backend development', 'natural language processing'",
+    "industry": "Specific industry experience, e.g., 'hedge fund', 'digital transformation in tech'",
+    "leadership_experience": "Experience in leadership roles, e.g., 'some leadership experience', 'managed remote teams'",
+    "project": "Specific projects or achievements, e.g., 'launched mobile apps with over 100,000 users'",
+    "team_experience": "Experience working with teams, e.g., 'worked with cross-functional teams'",
+    "other": "Any other relevant details not covered above",
+}
 
 class FixedEntity(BaseModel):
-    role: Optional[list[PositionName]] = Field(None, description="Job title or role")
+    role: Optional[list[Analyze_PositionName]] = Field(None, description="Job title or role")
     skill: Optional[list[SkillName]] = Field(None, description="Specific skills")
     certification: Optional[list[CertificationCategory]]= Field(None, description="Category of certifications")
     education_degree: Optional[list[DegreeCategory]] = Field(None, description="Educational Degree")
@@ -36,7 +62,7 @@ class QueryAnalysis(Runnable):
 
     def _generate_prompt(self, state: AgentState):
         extract_prompt = self.template.format(
-            entity_types=state["entity_types"],
+            entity_types=json.dumps(entity_types),
         )
         extract_fixed_prompt = EXTRACT_FIXED_ENTITY_PROMPT
 
@@ -67,7 +93,7 @@ class QueryAnalysis(Runnable):
         entity = llm.invoke(
             input=[
                 {"role":"system", "content": extract_prompt},
-                {"role":"user", "content": state['user_question']}
+                {"role":"user", "content": state['conversation_history'][-1]['content']}
             ]
         )
         
@@ -76,7 +102,7 @@ class QueryAnalysis(Runnable):
         fixed_entity = fixed_llm.invoke(
             input=[
                 {"role":"system", "content": extract_fixed_prompt},
-                {"role":"user", "content": state['user_question']}
+                {"role":"user", "content": state['conversation_history'][-1]['content']}
             ]
         )
 
@@ -86,6 +112,7 @@ class QueryAnalysis(Runnable):
         logger.debug(f"QueryAnalysis - Extract fixed entity: \n{dict_fixed_entity}")
 
         return {
+            "analyze_criteria": dict_fixed_entity | entity,
             "role": dict_fixed_entity["role"],
             "skill": dict_fixed_entity["skill"],
             "certification": dict_fixed_entity["certification"],
