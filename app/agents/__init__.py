@@ -75,7 +75,16 @@ class AgentGraph:
             os.makedirs(self.code_execution_result_path)
 
     def _check_choice_router(self, state: AgentState):
-        return state["choice_next_agents"] 
+        if state["choice_next_agents"] == "SEARCH_IN_DATABASE":
+            if state["search_trial"] <= 1:
+                return "SEARCH_IN_DATABASE"
+            else:
+                return "NOT_SEARCH_IN_DATABASE"
+        else:
+            return "NOT_SEARCH_IN_DATABASE"
+    
+    def _check_quantity_search(self, state: AgentState):
+        return state["search_trial"]
 
     def _add_graph_nodes(self):
 
@@ -207,6 +216,7 @@ class AgentGraph:
         async for event in self.compiled_graph.astream_events(inputs, config, version="v2"):
             kind = event["event"]
             print(f"{kind}: {event['name']}")
+            print(event['data'])
 
     async def ainvoke(self, inputs: dict, config: dict) -> dict:
         inputs.update(**AgentDefaultStates().__dict__)
@@ -237,36 +247,19 @@ if __name__ == "__main__":
     # }
 
     # inputs = {
-    #     "user_question": "I’m looking for someone who lived in hcmc and has managed teams of 5-10 people, has experience with Agile methodologies, and a strong understanding of DevOps practices in healthcare IT."
+    #     "user_question": "I’m looking for a software engineer living HCMC and has managed teams of 5-10 people, has experience with Agile methodologies, and a strong understanding of DevOps practices in healthcare IT."
     # }
 
     inputs = {
         "conversation_history": [
             {   
                 "role": "user", 
-                "content": "who are you ?"
+                "content": "who are you?"
             },
-#             {   "role": "assistant",
-#                 "content": """- **Tran Anh Hoang**:  
-#   + **Healthcare IT Experience**: Tran Anh Hoang has extensive experience in IT, particularly in ERP systems, which are often integral to healthcare IT environments. His background in developing and managing IT solutions for various companies aligns well with the healthcare sector's needs for efficient data management and operational workflows.  
-#   + **Agile Methodologies and Team Management**: He has held leadership roles, including Project Lead, where he coordinated with consulting partners and managed user permissions, indicating familiarity with Agile practices. However, specific experience in Agile methodologies is not explicitly mentioned, which could be a gap. His experience in managing teams and overseeing operations suggests he is capable of leading teams of 5-10 people effectively.  
-
-# - **Thái Thành Nguyên**:  
-#   + **Healthcare IT Experience**: While Thái Thành Nguyên's experience is primarily in AI and NLP, his technical skills could be beneficial in healthcare IT, especially in developing intelligent systems for data processing and patient management. However, he lacks direct experience in healthcare IT, which may limit his immediate applicability in this sector.  
-#   + **Agile Methodologies and Team Management**: His role as an AI Engineer involved collaborative projects, which may imply experience with Agile methodologies. However, there is no direct mention of managing teams, which is a critical aspect of the evaluation criteria. His technical skills are strong, but the lack of team management experience could be a significant gap for this role.  
-
-# - **Shino Pham**:  
-#   + **Healthcare IT Experience**: Shino Pham has significant experience in operations management, which is valuable in any IT context, including healthcare. However, his background does not specifically mention healthcare IT, which may limit his relevance to the role. His experience in enhancing team performance and strategic planning could be beneficial in a healthcare setting, but the lack of direct experience in healthcare IT is a notable gap.  
-#   + **Agile Methodologies and Team Management**: He has managed teams of over 20 staff, demonstrating strong leadership capabilities. His experience in operations and business analysis suggests familiarity with Agile practices, although this is not explicitly stated. His operational focus and ability to drive efficiency are strengths, but the lack of specific Agile experience could be a concern.  
-
-# **Final Comment:**  
-# Based on the evaluation criteria, **Tran Anh Hoang** emerges as the best candidate due to his extensive experience in IT and ERP systems, which are crucial for healthcare IT. His leadership roles indicate a capacity to manage teams effectively, although he could benefit from more explicit Agile experience. **Thái Thành Nguyên** has strong technical skills in AI, which could complement healthcare IT but lacks direct experience in the sector and team management. **Shino Pham**, while experienced in operations, does not have a specific focus on healthcare IT and is located in the USA, which may not align with the role's requirements. Therefore, Tran Anh Hoang is the most suitable candidate for the position."""
-#             },
-#             {   
-#                 "role": "user", 
-#                 "content": "tell me more about thanh nguyen"
-#             },
-        ]
+        ],
+        "search_trial" : 0,
+        "full_information": "",
+        "technical_reranker_output": "",
     }
 
     config={"callbacks": [langfuse_handler]}

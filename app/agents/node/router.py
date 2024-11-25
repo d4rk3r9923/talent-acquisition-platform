@@ -48,7 +48,15 @@ class Router(Runnable):
 
         logger.debug(state['conversation_history'])
         logger.debug(choice)
+    
+        if choice == 'SEARCH_IN_DATABASE':
+            search_trial = state['search_trial'] + 1
+        else:
+            search_trial = state['search_trial'] + 0
+
+        logger.debug(search_trial)
 
         return {
             "choice_next_agents": choice,
+            "search_trial": search_trial
         }

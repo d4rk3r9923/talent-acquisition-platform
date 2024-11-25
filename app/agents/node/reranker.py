@@ -38,7 +38,7 @@ class Reranker(Runnable):
         # Sort the combined results by RRF score descending
         combined_sorted = dict(sorted(rrf_scores.items(), key=lambda x: -x[1]))
         # Get the first 5 items
-        top = dict(list(combined_sorted.items())[:5])
+        top = dict(list(combined_sorted.items())[:6])
 
         return top
     

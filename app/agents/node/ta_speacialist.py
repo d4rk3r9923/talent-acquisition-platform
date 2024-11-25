@@ -18,6 +18,7 @@ class TASpecialist(Runnable):
 
     def _generate_prompt(self, state: AgentState):
         prompt = self.template.format(
+            top_candidate=state["full_information"],
             top_3_candidates=state["technical_reranker_output"],
         )
         return prompt
@@ -29,9 +30,9 @@ class TASpecialist(Runnable):
                 {"role":"system", "content": prompt}
             ] + state['conversation_history']
         )
-        logger.info(f"Speacialist: \n{response}")
+        logger.info(f"Speacialist: \n{prompt}")
 
         return {
-            "last_response": response.content
+            "final_response": response.content
         }
 

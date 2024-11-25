@@ -4,8 +4,8 @@ from langgraph.graph.message import AnyMessage, add_messages
 
 
 class AgentState(TypedDict):
-    messages: Annotated[list[AnyMessage], add_messages]
-
+    messages: Annotated[list[AnyMessage], add_messages] 
+    search_trial: int
     # user_question: str
     conversation_history: list
     choice_next_agents: str
@@ -34,7 +34,6 @@ class AgentState(TypedDict):
 
     technical_reranker_output: str
     final_response: str
-    last_response: str
 
 @dataclass
 class AgentDefaultStates:
