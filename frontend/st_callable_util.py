@@ -1,17 +1,20 @@
-from typing import Callable, TypeVar, Any, Dict, Optional
-import inspect
-
-from streamlit.runtime.scriptrunner import add_script_run_ctx, get_script_run_ctx
-from streamlit.delta_generator import DeltaGenerator
-
-from langchain_core.callbacks.base import BaseCallbackHandler
 import streamlit as st
+from app.graphdb.flex import *
+from app.graphdb.fixed import *
+from app.preprocessing.extract_pdf import process_single_pdf
 
 from langchain_core.messages import (
     AIMessage,
     HumanMessage,
     SystemMessage,
 )
+
+from dotenv import load_dotenv
+load_dotenv()
+NEO4J_URI = os.getenv("NEO4J_URI")
+NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+NEO4J_DATABASE = os.getenv("NEO4J_DATABASE")
 
 def transform_message_to_dict(messages):
     result = [
@@ -22,23 +25,11 @@ def transform_message_to_dict(messages):
     ]
     return result
 
-
 async def invoke_our_graph(graph_runnable, inputs, config, st_placeholder):
-    """
-    Asynchronously processes a stream of events from the graph_runnable and updates the Streamlit interface.
 
-    Args:
-        st_messages (list): List of messages to be sent to the graph_runnable.
-        st_placeholder (st.beta_container): Streamlit placeholder used to display updates and statuses.
-
-    Returns:
-        AIMessage: An AIMessage object containing the final aggregated text content from the events.
-    """
     # Set up placeholders for displaying updates in the Streamlit app
     container = st_placeholder  # This container will hold the dynamic Streamlit UI components
     thoughts_placeholder = container.container()  # Container for displaying status messages
-    token_placeholder = container.empty()  # Placeholder for displaying progressive token updates
-    final_text = ""  # Will store the accumulated text from the model's response
 
     # Stream events from the graph_runnable asynchronously
     async for event in graph_runnable.astream_events(inputs, config, version="v2"):
@@ -61,19 +52,34 @@ async def invoke_our_graph(graph_runnable, inputs, config, st_placeholder):
                         # st.write("Called ", event['name'])  # Show which tool is being called
                         # st.write("Tool input: ")
                         # st.code(event['data'].get('input'))  # Display the input data sent to the tool
-                        st.write("Next Action: ")
-                        output_placeholder = st.empty()  # Placeholder for tool output that will be updated later below
+                        st.markdown("**:red[Next Action:]**")
+                        choice_router = st.empty()  # Placeholder for tool output that will be updated later below
+                        st.markdown("**:red[Extract Entity:]**")
+                        entities = st.empty()
+                        st.markdown("**:red[Filter Ranking:]**")
+                        filter_results = st.empty()
+                        st.markdown("**:red[Embedding Ranking:]**")
+                        embedding_results = st.empty()
                         s.update(label="Completed Calling Router!", expanded=False)  # Update the status once done
 
         elif kind == "on_chain_end":
 
             if event['name'] == "_check_choice_router":
-
                 # The event signals the completion of a tool's execution
                 with thoughts_placeholder:
-                    # We assume that `on_tool_end` comes after `on_tool_start`, meaning output_placeholder exists
-                    if 'output_placeholder' in locals():
-                        output_placeholder.code(event['data'].get('output'))  # Display the tool's output
+                    choice_router.code(event['data'].get('output'))  # Display the tool's output
+
+            elif event['name'] == "query_analysis_node":
+                with thoughts_placeholder:
+                    entities.code(event['data'].get('output')['analyze_criteria'])  # Display the tool's output
+
+            elif event['name'] == "search_fixed_filter":
+                with thoughts_placeholder:
+                    filter_results.code(event['data'].get('output')['filter_results'])  # Display the tool's output  
+
+            elif event['name'] == "search_embedding":
+                with thoughts_placeholder:
+                    embedding_results.code(event['data'].get('output')['embedding_results'])  # Display the tool's output           
 
             elif event['name'] == "LangGraph":
                 response =  {
@@ -85,3 +91,29 @@ async def invoke_our_graph(graph_runnable, inputs, config, st_placeholder):
 
     # Return the final aggregated message after all events have been processed
     return response
+
+async def extract_from_pdf(pdf_paths):
+    # Run tasks concurrently for each PDF
+    tasks = [process_single_pdf(path, json_list_path="upload.json") for path in pdf_paths]
+    await asyncio.gather(*tasks)
+
+async def upload_to_database(json_path):
+
+    with open(json_path, "r") as file:
+        candidate_data = json.load(file)
+    try:
+        driver = await connect_to_neo4j(NEO4J_URI, NEO4J_DATABASE, NEO4J_USERNAME, NEO4J_PASSWORD)
+        await create_constraints(driver)
+        await create_flex_nodes(driver, candidate_data)
+        logger.info(f"{g}Successfully added person nodes and relationships")
+        async with driver.session() as session:
+            await create_constraints(session)
+            nodes = prepare_nodes()
+            node_types = ["Degree", "Position", "Skill", "Certification", "Publication"]
+            for node_list, node_type in zip(nodes, node_types):
+                await add_nodes_to_db(session, node_list, node_type)
+    except Exception as e:
+        logger.error(f"Error running main function:{e}")
+    finally:
+        await driver.close()
+        logger.info(f"Disconnected from Neo4j")

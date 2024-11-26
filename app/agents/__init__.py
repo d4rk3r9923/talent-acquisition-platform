@@ -239,7 +239,7 @@ if __name__ == "__main__":
     )
 
     # inputs = {
-    #     "user_question": "software engineer work in FPT before and live in hcmc. a full-stack developer who has built large-scale e-commerce websites and knows about performance optimization."
+    #     "user_question": "I need software engineer work in FPT before. a full-stack developer who has built large-scale e-commerce websites and knows about performance optimization."
     # }
 
     # inputs = {
@@ -247,14 +247,14 @@ if __name__ == "__main__":
     # }
 
     # inputs = {
-    #     "user_question": "I’m looking for a software engineer living HCMC and has managed teams of 5-10 people, has experience with Agile methodologies, and a strong understanding of DevOps practices in healthcare IT."
+    #     "user_question": "I’m looking for a Project Lead living HCMC and has managed teams of 5-10 people, has experience with Agile methodologies, and a strong understanding of DevOps practices in healthcare IT."
     # }
 
     inputs = {
         "conversation_history": [
             {   
                 "role": "user", 
-                "content": "who are you?"
+                "content": "I need a software engineer living HCMC who specializes in backend development with Java, has experience in RESTful APIs, and knows their way around Kubernetes"
             },
         ],
         "search_trial" : 0,

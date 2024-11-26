@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from loguru import logger
 from neo4j import AsyncGraphDatabase
 
-from app.references.util import Color, process_candidate_data
+from app.references.util import Color
 
 load_dotenv()
 

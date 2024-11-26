@@ -46,8 +46,6 @@ class Reranker(Runnable):
         reranker_results = self._reciprocal_rank_fusion(state['filter_results'], state['embedding_results'])
 
         logger.info(f"Reranker Ranking: \n{reranker_results}")
-            
-
         return {
             "top_reranker_results": reranker_results
         }

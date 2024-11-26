@@ -88,7 +88,7 @@ async def add_nodes_to_db(session, nodes, node_type):
                 f"MERGE (n:{node_type} {{id: $props.id}}) SET n += $props",
                 props=node,
             )
-            logger.info(f"{g}Added {node_type} node:{q} {node.get("name", node.get("field"))}")
+            # logger.info(f"{g}Added {node_type} node:{q} {node.get("name", node.get("field"))}")
         except Exception as e:
             logger.error(f"{r}Error adding {node_type} node:{q} {node} {e}")
 

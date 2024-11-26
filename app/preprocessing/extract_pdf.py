@@ -60,13 +60,39 @@ async def extract(path_pdf):
     )
 
     return response
+ 
+# # Process a single PDF and update JSON list
+# async def processing_upload_pdf(
+#         path_pdf: str, 
+#         embedding=embedding_OpenAI, 
+#     ):
+#     try:
+#         logger.info(f"{Color.RED}Processing {path_pdf}{Color.RESET}")
 
-    
+#         response = await extract(path_pdf)
+#         candidate_profile_dict = response.model_dump()  # Get the candidate profile as a dict
+#         candidate_profile_dict["person"]["path_pdf"] = path_pdf
+
+#         # candidate_profile_json = json.dumps(candidate_profile_dict, cls=CustomEncoder, ensure_ascii=False, indent=4)
+#         # logger.info(f"{Color.RED}Extracted contents for {path_pdf}: {Color.RESET} \n{candidate_profile_json}")
+
+#         candidate_profile_dict["person"]["embedding_summary"] = await embedding.aembed_query(candidate_profile_dict["person"]["summary"])
+#         candidate_profile_dict["person"]["embedding_location"] = await embedding.aembed_query(candidate_profile_dict["person"]["location"])
+        
+#         candidate_profile_dict = await postprocess_candidate_data(candidate_profile_dict)
+
+#         return candidate_profile_dict
+
+#     except Exception as e:
+#         logger.error(f"{Color.RED}Error processing {path_pdf}: {Color.RESET} {str(e)}")
+#         # Optionally, pass or continue depending on the desired behavior
+
+
 # Process a single PDF and update JSON list
 async def process_single_pdf(
         path_pdf: str, 
+        json_list_path: str = "upload.json",
         embedding=embedding_OpenAI, 
-        json_list_path: str = "data/50sample02.json"
     ):
     try:
         logger.info(f"{Color.RED}Processing {path_pdf}{Color.RESET}")
@@ -97,18 +123,18 @@ async def process_pdfs_concurrently(pdf_paths: List[str]):
     await asyncio.gather(*tasks)
 
 
-if __name__ == "__main__":
-    from tqdm.asyncio import tqdm_asyncio
-    import nest_asyncio
-    nest_asyncio.apply()
+# if __name__ == "__main__":
+#     from tqdm.asyncio import tqdm_asyncio
+#     import nest_asyncio
+#     nest_asyncio.apply()
 
-    async def main():
-        list_pdf = os.listdir("data/Resume_IT")
-        first_100_pdf = list_pdf[39:50]
+#     async def main():
+#         list_pdf = os.listdir("data/Resume_IT")
+#         first_100_pdf = list_pdf[39:50]
 
-        for i in tqdm_asyncio(range(0, len(first_100_pdf), 2), desc="Processing PDFs", unit="batch"):
-            three_pdf = first_100_pdf[i:i+2]
-            full_paths = [os.path.join("data/Resume_IT", pdf) for pdf in three_pdf]
-            await process_pdfs_concurrently(full_paths)
+#         for i in tqdm_asyncio(range(0, len(first_100_pdf), 2), desc="Processing PDFs", unit="batch"):
+#             three_pdf = first_100_pdf[i:i+2]
+#             full_paths = [os.path.join("data/Resume_IT", pdf) for pdf in three_pdf]
+#             await process_pdfs_concurrently(full_paths)
 
-    asyncio.run(main())
+#     asyncio.run(main())
