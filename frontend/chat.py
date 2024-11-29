@@ -1,9 +1,11 @@
+import sys
 import os
+
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from dotenv import load_dotenv
 import asyncio
 import streamlit as st
 from langchain_core.messages import AIMessage, HumanMessage
-
 from graph import invoke_our_graph
 from app.agents import AgentGraph
 from app.references.client import chatOpenai_client, embedding_OpenAI
