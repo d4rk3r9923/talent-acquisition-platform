@@ -31,7 +31,26 @@ This project aims to revolutionize the recruitment industry by integrating **Lar
 
 ---
 
+## ⚙️ Setup Instructions
 
-**💬 Contact**:  
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-repo-link/ai-talent-platform.git
+   cd ai-talent-platform
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+
+3. **Set PYTHONPATH (Windows): If you are using Windows, set the PYTHONPATH to the current directory:**
+   ```bash
+    $env:PYTHONPATH="."
+
+
+4. **Run the application:**
+   ```bash
+   streamlit run .\frontend\chat.py
+
+---
+## **💬 Contact**:  
 For any inquiries, please contact the supervisors or team members.
-
