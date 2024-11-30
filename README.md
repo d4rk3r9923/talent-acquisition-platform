@@ -52,5 +52,16 @@ This project aims to revolutionize the recruitment industry by integrating **Lar
    streamlit run .\frontend\chat.py
 
 ---
-## **💬 Contact**:  
-For any inquiries, please contact the supervisors or team members.
+## 🎥 Demo
+Our platform provides an intuitive and seamless experience for both recruiters and candidates. Below is a step-by-step demonstration of the platform's core functionalities:
+1. **Initial Screen**
+![alt text](image_readme/start_demo.png)
+This is the landing page where users are greeted with a clean, user-friendly interface. From here, they can navigate to upload resumes, view the candidate pool, or start analyzing profiles.
+2. **Analyze Process**
+![alt text](image_readme/event_demo.png)
+Once the user enters a query, the AI first choose an action to execute, then extracts key entities in pre-defined output structured, searches the database, ranks candidates based on compatibility, and presents the best-matched profiles with key insights.
+3. **Results**
+![alt text](image_readme/result_demo.png)
+4. **Upload Section**
+![alt text](image_readme/upload_demo.png)
+Here is where users can upload resumes in PDF format.
