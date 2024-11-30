@@ -31,6 +31,32 @@ This project aims to revolutionize the recruitment industry by integrating **Lar
 
 ---
 
+## 🚀 Deploy Model to Ollama
+
+1. **Install Ollama**:
+
+   Download Ollama from [link](https://ollama.com/)
+
+2. **Create A Model to Ollama**
+
+   Download Model.gguf and ModelFile from [link](https://huggingface.co/Alan1028/QueryExtractionLlama3.1-8B/tree/main)
+
+   Edit {FILE_LOCATION} to the path of file 'Model.gguf' in file 'ModelFile'
+
+   ```bash
+   FROM {FILE_LOCATION}
+   TEMPLATE """{{ if .Messages }}
+   {{- if or .System .Tools }}<|start_header_id|>system<|end_header_id|>
+   {{- if .System }}
+
+   ```
+
+   Create a new model to Ollama
+
+   ```bash
+   ollama create QueryExtractionLlama -f /ModelFile
+   ```
+
 ## ⚙️ Setup Instructions
 
 1. **Clone the repository**:
