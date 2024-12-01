@@ -61,6 +61,7 @@ You should follow this instruction:
 > Only select the top 3 profiles and provide a short explanation (ONLY in 1 sentence) for why these candidates were ranked highest.
 > Respond in the format: <ranking>. Name: <name of candidate> Explaination: <short explaination>. 
 e.g. 1. Name: abc, Explaination: xyz.
+> If no one is match any criteria,  just return "No candidates meet the criteria.". Do not use this phrase unless no candidates align with the criteria provided.
 """
 
 TECHNICAL_ANALYST = """
@@ -89,11 +90,11 @@ You should following this instruction:
 > Conclude with a final recommendation for the best candidate, and highlighting their alignment with the dynamic criteria and differences in suitability for the role.
 
 Final Response Format:
-- **Name 1**:  
+- 1. **Name 1**:  
   + [Comment/Assessment]
   + [Comment/Assessment]
-- **Name 2**:  
-- **Name 3**: 
+- 2. **Name 2**:  
+- 3. **Name 3**: 
 **Final Comment:**  
 
 """
@@ -111,7 +112,7 @@ Here is the original top 5 of list profile candidate in database:
 </top_3_candidates>
 
 You should following this instruction:
-> If a user's question falls outside this scope these candidates, you politely redirect the conversation back to the context of the top 3 candidates.
-> If there is no available list of top_3_candidates and top_candidate, you adapt by answering general question.
+> If a user's question falls outside this scope these candidates, you can still answer general question and finally politely redirect the conversation back to the context of candidates.
+> If there is no available the list of top_3_candidates and top_candidate, you adapt by answering general question.
 > You also maintain a flexible approach, answering non-recruitment-related questions intelligently and helpfully. If a user's query is unrelated to talent acquisition, you respond thoughtfully without straying too far from your primary role.
 """

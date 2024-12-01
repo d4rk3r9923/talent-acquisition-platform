@@ -1,10 +1,10 @@
 import os
+import json
 from dotenv import load_dotenv
 import asyncio
+import uuid
 import streamlit as st
 from langchain_core.messages import AIMessage, HumanMessage
-
-from graph import invoke_our_graph
 from app.agents import AgentGraph
 from app.references.client import chatOpenai_client, embedding_OpenAI
 from st_callable_util import (
@@ -32,17 +32,24 @@ def save_uploaded_file(uploaded_file):
     # Define JSON output file path
     json_output_path = "upload.json"
     try:
-        # Run PDF extraction and upload process
-        asyncio.run(extract_from_pdf([save_path]))
-        asyncio.run(upload_to_database(json_output_path))
+        with st.spinner("Extracting..."):
+            # Run PDF extraction and upload process
+            asyncio.run(extract_from_pdf([save_path]))
+            asyncio.run(upload_to_database(json_output_path))
         
-        st.success("PDF processed successfully and data added to the database.")
+        st.success("PDF was processed successfully and added to Graph Database.")
+
+        # Load and display the JSON content
+        if os.path.exists(json_output_path):
+            with open(json_output_path, "r") as json_file:
+                json_content = json.load(json_file)
+            person_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, json_content[-1]["person"]["path_pdf"]))
+            st.success(f"Extracted ID successfully: **{person_id}**")
+
+        # os.remove(json_output_path)
+
     except Exception as e:
         st.error(f"An error occurred: {e}")
-    finally:
-        # Clean up: Remove the upload.json file after processing
-        if os.path.exists(json_output_path):
-            os.remove(json_output_path)
 
 
 def create_chat_tab(tab, prompt, main_agent):
@@ -115,9 +122,10 @@ with st.expander(label="Introduction", expanded=False):
     [The AI-Powered Talent Acquisition Platform](http://localhost:8501/) transforms recruitment by leveraging advanced AI to streamline processes, enhance candidate experiences, and deliver data-driven insights. 
 
     This thesis presents the development of an AI-powered talent
-    acquisition platform aimed at revolutionizing the recruitment process by leveraging advanced technologies, including `Natural Language Processing (NLP)` and `Large Language
-    Models (LLMs)`. 
+    acquisition platform enhanced the hiring process by enabling `natural language queries` for improved candidate search and `automating document parsing` to convert unstructured resumes into structured data for dynamic relationship modeling. 
     """
+    # Show image inside the expander
+    st.image("images/system.png", caption="AI-Powered Talent Acquisition System Architecture")
 
 # Capture user input from chat input
 prompt = st.chat_input("Type your message here...")
