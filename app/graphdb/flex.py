@@ -29,7 +29,7 @@ async def connect_to_neo4j(uri, database, user, password):
 async def create_flex_nodes(driver, person_data):
     async with driver.session() as session:
         for person in person_data:
-            person_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, person["person"]["name"]))
+            person_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, person["person"]["path_pdf"]))
             person_props = {
                 "id": person_id,
                 "name": person["person"].get("name"),
