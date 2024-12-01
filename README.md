@@ -48,7 +48,6 @@ This project aims to revolutionize the recruitment industry by integrating **Lar
    TEMPLATE """{{ if .Messages }}
    {{- if or .System .Tools }}<|start_header_id|>system<|end_header_id|>
    {{- if .System }}
-
    ```
 
    Create a new model to Ollama
@@ -63,31 +62,26 @@ This project aims to revolutionize the recruitment industry by integrating **Lar
    ```bash
    git clone https://github.com/your-repo-link/ai-talent-platform.git
    cd ai-talent-platform
-
 2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
-
 3. **Set PYTHONPATH (Windows): If you are using Windows, set the PYTHONPATH to the current directory:**
    ```bash
     $env:PYTHONPATH="."
-
-
 4. **Run the application:**
    ```bash
    streamlit run .\frontend\chat.py
-
 ---
 ## 🎥 Demo
 Our platform provides an intuitive and seamless experience for both recruiters and candidates. Below is a step-by-step demonstration of the platform's core functionalities:
 1. **Initial Screen**
-![alt text](image_readme/start_demo.png)
+![alt text](images/start_demo.png)
 This is the landing page where users are greeted with a clean, user-friendly interface. From here, they can navigate to upload resumes, view the candidate pool, or start analyzing profiles.
 2. **Analyze Process**
-![alt text](image_readme/event_demo.png)
+![alt text](images/event_demo.png)
 Once the user enters a query, the AI first choose an action to execute, then extracts key entities in pre-defined output structured, searches the database, ranks candidates based on compatibility, and presents the best-matched profiles with key insights.
 3. **Results**
-![alt text](image_readme/result_demo.png)
+![alt text](images/result_demo.png)
 4. **Upload Section**
-![alt text](image_readme/upload_demo.png)
+![alt text](images/upload_demo.png)
 Here is where users can upload resumes in PDF format.
