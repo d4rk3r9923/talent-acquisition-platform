@@ -23,7 +23,7 @@ chatOpenai_client = ChatOpenAI(
 )
 
 chatOllama_llama = ChatOllama(
-    model="llama3.1",
+    model="QueryExtractionLlama",
     temperature=0,
 )
 

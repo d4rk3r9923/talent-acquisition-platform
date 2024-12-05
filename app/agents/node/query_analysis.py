@@ -4,6 +4,7 @@ from enum import Enum
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import Runnable
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from loguru import logger
 from typing import Optional, TypedDict
 from pydantic import BaseModel, Field
@@ -53,7 +54,7 @@ class FixedEntity(BaseModel):
 
 
 class QueryAnalysis(Runnable):
-    def __init__(self, llm: ChatOpenAI) -> None:
+    def __init__(self, llm: ChatOllama) -> None:
         super().__init__()
         self.llm = llm
         self.template = PromptTemplate.from_template(
