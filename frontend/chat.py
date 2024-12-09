@@ -46,8 +46,7 @@ def save_uploaded_file(uploaded_file):
                 json_content = json.load(json_file)
             person_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, json_content[-1]["person"]["path_pdf"]))
             st.success(f"Extracted ID successfully: **{person_id}**")
-
-        # os.remove(json_output_path)
+            os.remove(json_output_path)
 
     except Exception as e:
         st.error(f"An error occurred: {e}")

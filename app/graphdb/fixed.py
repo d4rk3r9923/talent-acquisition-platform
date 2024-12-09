@@ -63,7 +63,7 @@ def prepare_nodes():
     return degree_nodes, position_nodes, skill_nodes, certification_nodes, publication_nodes
 
 
-async def create_constraints(session):
+async def create_fixed_constraints(session):
     try:
         constraints = [
             "CREATE CONSTRAINT IF NOT EXISTS FOR (n:Degree) REQUIRE n.id IS UNIQUE",
@@ -99,7 +99,7 @@ async def main():
         logger.info(f"{g}Connected to Neo4j")
 
         async with driver.session() as session:
-            await create_constraints(session)
+            await create_fixed_constraints(session)
             nodes = prepare_nodes()
             node_types = ["Degree", "Position", "Skill", "Certification", "Publication"]
 

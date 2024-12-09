@@ -92,10 +92,22 @@ async def invoke_our_graph(graph_runnable, inputs, config, st_placeholder):
     # Return the final aggregated message after all events have been processed
     return response
 
+async def clear_upload_path(upload_path):
+    try:
+        if os.path.exists(upload_path):
+            for file in os.listdir(upload_path):
+                file_path = os.path.join(upload_path, file)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+    except Exception as e:
+        logger.error(f"Error clearing upload path: {e}")
+
+        
 async def extract_from_pdf(pdf_paths):
     # Run tasks concurrently for each PDF
     tasks = [process_single_pdf(path, json_list_path="upload.json") for path in pdf_paths]
     await asyncio.gather(*tasks)
+    await clear_upload_path(upload_path="uploads")
 
 async def upload_to_database(json_path):
 
@@ -103,11 +115,11 @@ async def upload_to_database(json_path):
         candidate_data = json.load(file)
     try:
         driver = await connect_to_neo4j(NEO4J_URI, NEO4J_DATABASE, NEO4J_USERNAME, NEO4J_PASSWORD)
-        await create_constraints(driver)
+        await create_flex_constraints(driver)
         await create_flex_nodes(driver, candidate_data)
         logger.info(f"{g}Successfully added person nodes and relationships")
         async with driver.session() as session:
-            await create_constraints(session)
+            await create_fixed_constraints(session)
             nodes = prepare_nodes()
             node_types = ["Degree", "Position", "Skill", "Certification", "Publication"]
             for node_list, node_type in zip(nodes, node_types):

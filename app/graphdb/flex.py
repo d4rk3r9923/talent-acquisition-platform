@@ -255,7 +255,7 @@ async def create_flex_nodes(driver, person_data):
                 logger.error(f"{r}Error adding Person node or relationships for {q}{person_props['name']}: {q}{e}")
 
 
-async def create_constraints(driver):
+async def create_flex_constraints(driver):
     async with driver.session() as session:
         try:
             await session.run(
@@ -340,7 +340,7 @@ async def main():
     try:
         driver = await connect_to_neo4j(NEO4J_URI, NEO4J_DATABASE, NEO4J_USERNAME, NEO4J_PASSWORD)
         logger.info(f"{g}Connected to Neo4j database")
-        await create_constraints(driver)
+        await create_flex_constraints(driver)
         await create_flex_nodes(driver, candidate_data)
         logger.info(f"{g}Successfully added person nodes and relationships")
     except Exception as e:
