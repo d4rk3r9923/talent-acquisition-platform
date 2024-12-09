@@ -92,7 +92,7 @@ async def invoke_our_graph(graph_runnable, inputs, config, st_placeholder):
     # Return the final aggregated message after all events have been processed
     return response
 
-async def clear_upload_path(upload_path):
+def clear_upload_path(upload_path):
     try:
         if os.path.exists(upload_path):
             for file in os.listdir(upload_path):
@@ -102,13 +102,20 @@ async def clear_upload_path(upload_path):
     except Exception as e:
         logger.error(f"Error clearing upload path: {e}")
 
-        
-async def extract_from_pdf(pdf_paths):
-    # Run tasks concurrently for each PDF
-    tasks = [process_single_pdf(path, json_list_path="upload.json") for path in pdf_paths]
-    await asyncio.gather(*tasks)
-    await clear_upload_path(upload_path="uploads")
+def clear_json(json_path):
+    try:
+        if os.path.exists(json_path):
+            with open(json_path, "w") as json_file:
+                json.dump([], json_file) 
+    except Exception as e:
+        logger.error(f"Error resetting JSON file: {e}")
 
+        
+async def extract_from_pdf(pdf_paths, json_path):
+    # Run tasks concurrently for each PDF
+    tasks = [process_single_pdf(path, json_path) for path in pdf_paths]
+    await asyncio.gather(*tasks)
+ 
 async def upload_to_database(json_path):
 
     with open(json_path, "r") as file:

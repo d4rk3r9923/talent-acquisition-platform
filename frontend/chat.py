@@ -11,7 +11,9 @@ from st_callable_util import (
     invoke_our_graph, 
     transform_message_to_dict, 
     extract_from_pdf, 
-    upload_to_database
+    upload_to_database,
+    clear_json,
+    clear_upload_path
 )  
 
 
@@ -31,12 +33,13 @@ def save_uploaded_file(uploaded_file):
         f.write(uploaded_file.getbuffer())
     
     # Define JSON output file path
-    json_output_path = "upload.json"
+    
     try:
         with st.spinner("Extracting..."):
+            json_output_path = "upload.json"
             # Run PDF extraction and upload process
-            asyncio.run(extract_from_pdf([save_path]))
-            asyncio.run(upload_to_database(json_output_path))
+            asyncio.run(extract_from_pdf([save_path], json_path=json_output_path))
+            asyncio.run(upload_to_database(json_path=json_output_path))
         
         st.success("PDF was processed successfully and added to Graph Database.")
 
@@ -46,7 +49,8 @@ def save_uploaded_file(uploaded_file):
                 json_content = json.load(json_file)
             person_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, json_content[-1]["person"]["path_pdf"]))
             st.success(f"Extracted ID successfully: **{person_id}**")
-            os.remove(json_output_path)
+        clear_upload_path("uploads")
+        clear_json(json_path=json_output_path)
 
     except Exception as e:
         st.error(f"An error occurred: {e}")
