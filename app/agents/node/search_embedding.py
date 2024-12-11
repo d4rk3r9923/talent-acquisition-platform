@@ -16,8 +16,10 @@ class SearchEmbedding(Runnable):
         self.graphdb = graphdb
 
     def _sort_vector_nodes(self, data: dict) -> str:
+        user_quesion = data["conversation_history"][-1]["content"]
+        print(user_quesion)
         embedding = {
-            "summary": self.model_embedding.embed_query(data["summary"]) if data["summary"] else "",
+            "summary": self.model_embedding.embed_query(data["summary"]) if data["summary"] else self.model_embedding.embed_query(user_quesion),
             "location": self.model_embedding.embed_query(data["location"]) if data["location"] else ""        
         }
 
@@ -60,7 +62,8 @@ class SearchEmbedding(Runnable):
         data = {
             "summary": state['summary'],
             "location": state['location'],
-            "filter_results": state['filter_results']
+            "filter_results": state['filter_results'],
+            "conversation_history": state['conversation_history']
         }
 
         with self.graphdb.session(database=os.getenv("NEO4J_DATABASE")) as session:
