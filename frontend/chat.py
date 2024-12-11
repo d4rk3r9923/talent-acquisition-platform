@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import asyncio
 import uuid
 import streamlit as st
+from langfuse.callback import CallbackHandler
 from langchain_core.messages import AIMessage, HumanMessage
 from app.agents import AgentGraph
 from app.references.client import chatOpenai_client, embedding_OpenAI
@@ -29,7 +30,7 @@ def save_uploaded_file(uploaded_file):
     os.makedirs("uploads", exist_ok=True)
     with open(save_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
-    
+    print(save_path)
     # Define JSON output file path
     json_output_path = "upload.json"
     try:
@@ -55,7 +56,7 @@ def save_uploaded_file(uploaded_file):
 
 def create_chat_tab(tab, prompt, main_agent):
     with tab:
-
+       
         # Loop through all messages in the session state and render them as a chat on every st.refresh mech
         for msg in st.session_state.messages:
             # https://docs.streamlit.io/develop/api-reference/chat/st.chat_message
@@ -86,7 +87,7 @@ def create_chat_tab(tab, prompt, main_agent):
                             "full_information": st.session_state["full_information"],
                             "technical_reranker_output": st.session_state["technical_reranker_output"],
                         },
-                        config={},
+                        config={"callbacks": [st.session_state.langfuse]},
                         st_placeholder=placeholder,
                     )
                 )
@@ -116,6 +117,11 @@ if "messages" not in st.session_state:
     st.session_state["search_trial"] = 0
     st.session_state["full_information"] = ""
     st.session_state["technical_reranker_output"] = ""
+    st.session_state["langfuse"] = CallbackHandler(
+        secret_key="sk-lf-88194161-6bab-48a1-9dd6-28ba5af82847",
+        public_key="pk-lf-8f26d208-2582-4aa4-ad3b-16c6e9bd37e9",
+        host="https://us.cloud.langfuse.com"
+    )
 
 # st write magic
 with st.expander(label="Introduction", expanded=False):

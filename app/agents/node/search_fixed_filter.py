@@ -89,7 +89,7 @@ class SearchFixedFilter(Runnable):
         if data.get('years_of_experience'):
             query += (
                 "MATCH (p)-[r:WORKED_AS]->()\n"
-                "WITH p, sum(r.duration) AS total_yoe\n"
+                "WITH p, sum(r.duration/12.0) AS total_yoe\n"
             )
             and_clauses.append(f"total_yoe {data['years_of_experience'].strip()}")
 
