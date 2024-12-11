@@ -101,6 +101,7 @@ async def upload_to_database(json_path):
 
     with open(json_path, "r") as file:
         candidate_data = json.load(file)
+        candidate_data = [candidate_data[-1]]
     try:
         driver = await connect_to_neo4j(NEO4J_URI, NEO4J_DATABASE, NEO4J_USERNAME, NEO4J_PASSWORD)
         await create_constraints(driver)
