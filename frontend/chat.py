@@ -1,6 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
+load_dotenv()
 import asyncio
 import uuid
 import streamlit as st
@@ -13,8 +14,11 @@ from st_callable_util import (
     transform_message_to_dict, 
     extract_from_pdf, 
     upload_to_database
-)  
+)
 
+SECRET_KEY = os.getenv("SECRET_KEY")
+PUBLIC_KEY = os.getenv("PUBLIC_KEY")
+HOST = os.getenv("HOST")
 
 def create_upload_tab(tab):
     with tab:
@@ -118,9 +122,9 @@ if "messages" not in st.session_state:
     st.session_state["full_information"] = ""
     st.session_state["technical_reranker_output"] = ""
     st.session_state["langfuse"] = CallbackHandler(
-        secret_key="sk-lf-88194161-6bab-48a1-9dd6-28ba5af82847",
-        public_key="pk-lf-8f26d208-2582-4aa4-ad3b-16c6e9bd37e9",
-        host="https://us.cloud.langfuse.com"
+        secret_key=SECRET_KEY,
+        public_key=PUBLIC_KEY,
+        host=HOST
     )
 
 # st write magic

@@ -30,6 +30,9 @@ from app.agents.node import (
 
 load_dotenv()
 
+SECRET_KEY = os.getenv("SECRET_KEY")
+PUBLIC_KEY = os.getenv("PUBLIC_KEY")
+HOST = os.getenv("HOST")
 
 class AgentNode(Enum):
     init_node = auto()
@@ -233,9 +236,9 @@ if __name__ == "__main__":
     from app.references.client import chatOpenai_client, embedding_OpenAI
 
     langfuse_handler = CallbackHandler(
-        secret_key="sk-lf-88194161-6bab-48a1-9dd6-28ba5af82847",
-        public_key="pk-lf-8f26d208-2582-4aa4-ad3b-16c6e9bd37e9",
-        host="https://us.cloud.langfuse.com"
+        secret_key=SECRET_KEY,
+        public_key=PUBLIC_KEY,
+        host=HOST
     )
 
     # inputs = {
